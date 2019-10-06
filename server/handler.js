@@ -1,17 +1,17 @@
 'use strict';
 
-module.exports.endpoint = (event, context, callback) => {
-  
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
-    },
-    body: JSON.stringify({
-      details:[1,2,3],
-    }),
-  };
+const igdb = require('igdb-api-node').default;
 
-  callback(null, response);
+const client = igdb('6d16cbfd74aef6f539c80bae88f9b0d6');
+
+module.exports.endpoint = async (event, context, callback) => {
+
+  const response = await client
+      .fields('name,cover') // same as above
+      .limit(5) // limit to 50 results
+      .search('mario') // search for a specific name (search implementations can vary)
+      .request('/games'); // execute the query and return a response object
+
+  //console.log(response.data);  
+  callback(null, response.data);
 };

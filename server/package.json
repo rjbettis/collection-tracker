@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "description",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "igdb-api-node": "^4.0.3"
+  }
 }

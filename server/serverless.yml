@@ -28,3 +28,4 @@ functions:
           path: /get-details
           method: GET
           cors: true
+          integration: LAMBDA

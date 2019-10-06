@@ -8,14 +8,30 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    
     fetch('https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-details')
     .then(response => response.json())
-    .then(res => this.setState( { details:res.details }));
+    .then(res => this.setState( { details:res }));
   }
 
+
   render() {
+
+    console.log(this.state.details);
     return (
-      <div>{JSON.stringify(this.state.details)}</div>
+      
+      
+      <div>
+        <p>
+        {
+        JSON.stringify(this.state.details)
+        }
+        </p>
+      
+      <p>{}</p>
+
+      
+      </div>
     );
   }
 }
