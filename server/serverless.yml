@@ -25,7 +25,10 @@ functions:
     handler: handler.endpoint
     events:
       - http:
-          path: /get-details
+          path: /game-details
           method: GET
           cors: true
           integration: LAMBDA
+          request:
+            template:
+              application/json: '{ "search" : "$input.params(''search'')" }'
