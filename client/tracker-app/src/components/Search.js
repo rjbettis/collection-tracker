@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Results from './Results';
 
 class Search extends Component {
 
     state = {
         searchValue: '',
-        results: []
+        displayResults: false,
+        searchResults: []
     };
 
     handleOnChange = event => {
@@ -13,6 +15,9 @@ class Search extends Component {
 
     handleSearch = () => {
         this.makeApiCall(this.state.searchValue);
+
+        this.setState({displayResults: !this.state.displayQuestions})
+
     };
 
     makeApiCall = searchInput => {
@@ -22,10 +27,14 @@ class Search extends Component {
         .then(response => {
             return response.json();
         })
-        .then(res => this.setState( { results:res }));
+        .then(res => this.setState( { searchResults:res }));
+
     };
 
     render() {
+
+        
+
         return(
             <div>
                 <h1>Search</h1>
@@ -37,6 +46,11 @@ class Search extends Component {
                     value={this.state.searchValue}
                 />
                 <button onClick={this.handleSearch}>Search</button>
+                {this.state.displayResults ?
+                <Results searchResults={this.state.searchResults}/> :
+                null
+                }
+                
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Search from './components/Search';
 
+
 class App extends Component {
   
   state = {
@@ -23,6 +24,7 @@ class App extends Component {
 
       <div className="App">
         <Search />
+        
 
         <p>
         {
