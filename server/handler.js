@@ -11,7 +11,5 @@ module.exports.endpoint = async (event, context, callback) => {
       .limit(5) // limit to 50 results
       .search(event.search) // search for a specific name (search implementations can vary)
       .request('/games'); // execute the query and return a response object
-
   callback(null, response.data);
 };
-
