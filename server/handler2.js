@@ -12,9 +12,9 @@ module.exports.endpoint = (event, context, callback) => {
         TableName: process.env.DYNAMODB_TABLE,
         Item: {
             'id' : uuid.v1(),
-            'platform' : 'platform',
-            'name' : 'name',
-            'cover' : 'cover',
+            'platform' : "platform",
+            'name' : event.name,
+            'cover' : event.cover
         },
     };
 
@@ -27,3 +27,5 @@ module.exports.endpoint = (event, context, callback) => {
         }
     });
 };
+
+// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-data?name=zelda&platform=NES&cover=www.gamecover.com

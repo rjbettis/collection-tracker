@@ -50,6 +50,8 @@ class Search extends Component {
                 <Results searchResults={this.state.searchResults}/> :
                 null
                 }
+
+                {/* console.log(this.state.searchResults) */}
                 
             </div>
         );

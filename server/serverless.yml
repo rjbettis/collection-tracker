@@ -54,7 +54,7 @@ functions:
           integration: LAMBDA
           request:
             template:
-              application/json: '{ "add" : "$input.params(''add'')" }'
+              application/json: '{ "name" : "$input.params(''name'')", "cover" : "$input.params(''cover'')", "platform" : "$input.params(''platform'')" }'
 
 
 resources:
