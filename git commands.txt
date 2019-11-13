@@ -1,5 +1,0 @@
-cd "C:\React Projects\serverless-project"
-git add .
-git status
-git commit -m "comment"
-git push -u origin master

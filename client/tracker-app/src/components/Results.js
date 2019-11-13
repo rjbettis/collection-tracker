@@ -40,10 +40,8 @@ class Results extends Component {
         const games2 = this.props.searchResults.map((game) => {
             
             const imageUrl = game.cover ? 'https://images.igdb.com/igdb/image/upload/t_cover_small/' + game.cover.image_id + '.jpg' : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
-            
             var gameName = game["name"];
 
-            //console.log(this.state.searchResults);
             return (
                 <React.Fragment>
                     <p>
