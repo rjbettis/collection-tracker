@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
-
+var platChecked;
 
 class Results extends Component {
 
@@ -10,8 +9,10 @@ class Results extends Component {
         added: ""
     };
 
-    addGame(name, cover, gameName) {
-        var addGame = `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-data?name=${name}&platform=platform&cover=${cover}`;
+    addGame(name, cover, platChecked) {
+        console.log(platChecked)
+        
+        var addGame = `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-data?name=${name}&platform=${platChecked}&cover=${cover}`;
 
         fetch(addGame)
         .then(response => {
@@ -22,10 +23,6 @@ class Results extends Component {
             added: "Added " + name
         });
     }
-
-    handleLabelClick() {
-        
-    }
     
     getStyle = () => {
         return {
@@ -35,12 +32,11 @@ class Results extends Component {
         }
     }
 
+    markPlat = event => {
+        platChecked = event.target.value
+    }
+
     render() {
-
-
-        
-        
-        //const { name, cover } = this.props.searchResults;
         const games2 = this.props.searchResults.map((game) => {
             
             const imageUrl = game.cover ? 'https://images.igdb.com/igdb/image/upload/t_cover_small/' + game.cover.image_id + '.jpg' : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
@@ -53,12 +49,12 @@ class Results extends Component {
                     <p>
                         <img key={gameName + 'Cover'} src={imageUrl} style={{width:75, height:100}} alt="cover"></img>
                         <br/>
-                        <button key={gameName} id={gameName} onClick={e => this.addGame(gameName, imageUrl)} >{gameName}</button>
+                        <button key={gameName} id={gameName} onClick={e => this.addGame(gameName, imageUrl, platChecked)} >{gameName}</button>
                         <br/>
                         { game.platforms !== undefined ? game.platforms.map((abbr) => {
                             return (
                                         <React.Fragment>
-                                                <input type="checkbox" value={ abbr.abbreviation } />
+                                                <input type="checkbox" onChange={event => this.markPlat(event)} value={ abbr.abbreviation } />
                                                 <label>{abbr.abbreviation + " " }</label>
                                         </React.Fragment>
                                     )
@@ -74,12 +70,7 @@ class Results extends Component {
                 <h1>Results</h1>
                 <br></br>
                 <h2><label>{this.state.added}</label></h2>
-                { /* console.dir( this.props.searchResults[0].name) */ }
-                
-
                 { games2 }
-
-
             </div>
         );
     }
@@ -89,7 +80,5 @@ class Results extends Component {
 Results.propTypes = {
     searchResults: PropTypes.array.isRequired
 }
-
-
 
 export default Results;

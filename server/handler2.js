@@ -12,7 +12,7 @@ module.exports.endpoint = (event, context, callback) => {
         TableName: process.env.DYNAMODB_TABLE,
         Item: {
             'id' : uuid.v1(),
-            'platform' : "platform",
+            'platform' : event.platform,
             'name' : event.name,
             'cover' : event.cover
         },

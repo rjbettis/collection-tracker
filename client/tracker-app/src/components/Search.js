@@ -31,28 +31,29 @@ class Search extends Component {
 
     };
 
+    getStyle = () => {
+        return {
+            background: '#f4f4f4',
+            padding: '10px',
+        }
+    }
+
     render() {
-
-        
-
         return(
-            <div>
-                <h1>Search</h1>
+            <div style={this.getStyle()}>
+                <h1>Search</h1>              
                 <input 
-                    name="text" 
+                    name="Game" 
                     type="text" 
-                    placeholder="Search" 
+                    placeholder="Game" 
                     onChange={event => this.handleOnChange(event)}
                     value={this.state.searchValue}
                 />
-                <button onClick={this.handleSearch}>Search</button>
                 {this.state.displayResults ?
                 <Results searchResults={this.state.searchResults}/> :
                 null
                 }
-
-                {/* console.log(this.state.searchResults) */}
-                
+                <button onClick={this.handleSearch}>Search</button>
             </div>
         );
     }
