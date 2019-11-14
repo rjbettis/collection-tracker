@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import coverNotFound from './../images/No_image_available.png'
 
 var platChecked = '';
 
@@ -39,13 +40,13 @@ class Results extends Component {
     render() {
         const games2 = this.props.searchResults.map((game) => {
             
-            const imageUrl = game.cover ? 'https://images.igdb.com/igdb/image/upload/t_cover_small/' + game.cover.image_id + '.jpg' : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
+            const imageUrl = game.cover ? 'https://images.igdb.com/igdb/image/upload/t_cover_small/' + game.cover.image_id + '.jpg' : coverNotFound;
             var gameName = game["name"];
 
             return (
                 <React.Fragment>
                     <p>
-                        <img key={gameName + 'Cover'} src={imageUrl} style={{width:75, height:100}} alt="cover"></img>
+                        <img key={gameName + 'Cover'} src={imageUrl} alt="cover"></img>
                         <br/>
                         <button key={gameName} id={gameName} onClick={e => this.addGame(gameName, imageUrl, platChecked)} >{gameName}</button>
                         <br/>

@@ -55,6 +55,17 @@ functions:
           request:
             template:
               application/json: '{ "name" : "$input.params(''name'')", "cover" : "$input.params(''cover'')", "platform" : "$input.params(''platform'')" }'
+  scan-data:
+    handler: handler3.endpoint
+    events:
+      - http:
+          path: /scan-data
+          method: GET
+          cors: true
+          integration: LAMBDA
+          request:
+            template:
+              application/json: '{ "platform" : "$input.params(''platform'')" }'
 
 
 resources:
