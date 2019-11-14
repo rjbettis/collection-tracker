@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import SearchDB from './components/SearchDB';
 
 export class Profile extends Component {
     render() {
         return (
             <div>
-                <SearchDB />
+                <h1>Profile</h1>
+                <p>games in database show here</p>
             </div>
         )
     }

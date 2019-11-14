@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+import Header from './components/Header';
+import Search from './components/pages/Search';
+import Profile from './components/pages/Profile';
 import './App.css';
-import Search from './components/Search';
 
 
 class App extends Component {
@@ -11,14 +14,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Search />
-        <p>
-        {
-        //JSON.stringify(this.state.details)
-        }
-        </p>
-      </div>
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <Route exact path="/search" component={Search} />
+            <Route exact path="/profile" component={Profile} />
+          </div>
+        </div>
+      </Router>
+      
     );
   }
 }

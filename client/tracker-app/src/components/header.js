@@ -1,13 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export class header extends Component {
-    render() {
-        return (
-            <div>
-                <p>Header</p>
-            </div>
-        )
-    }
+function Header() {
+    return (
+        <header style={headerStyle}>
+            <h1>Collection Tracker</h1>
+            <Link style={linkStyle} to="/search">Search</Link> | <Link style={linkStyle} to="/profile">Profile</Link>
+        </header>
+    )
 }
 
-export default header
+const headerStyle = {
+    background: '#333',
+    color: '#fff',
+    textAlign: 'center',
+    padding: '10px'
+}
+
+const linkStyle = {
+    color: '#fff',
+    textDecoration: 'none'
+}
+
+export default Header

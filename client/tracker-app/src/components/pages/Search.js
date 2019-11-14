@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SearchDB from './components/SearchDB';
+import SearchDB from '../SearchDB';
 
 export class Profile extends Component {
     render() {

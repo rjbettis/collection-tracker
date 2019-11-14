@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-var platChecked;
+var platChecked = '';
 
 class Results extends Component {
 
@@ -32,7 +32,7 @@ class Results extends Component {
         }
     }
 
-    markPlat = event => {
+    platCheck = event => {
         platChecked = event.target.value
     }
 
@@ -52,7 +52,7 @@ class Results extends Component {
                         { game.platforms !== undefined ? game.platforms.map((abbr) => {
                             return (
                                         <React.Fragment>
-                                                <input type="checkbox" onChange={event => this.markPlat(event)} value={ abbr.abbreviation } />
+                                                <input type="radio" name="platRadio" onChange={event => this.platCheck(event)} value={ abbr.abbreviation } />
                                                 <label>{abbr.abbreviation + " " }</label>
                                         </React.Fragment>
                                     )
