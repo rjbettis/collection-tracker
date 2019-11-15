@@ -1,3 +1,5 @@
+//gets igdb api
+
 'use strict';
 
 const igdb = require('igdb-api-node').default;

@@ -1,20 +1,17 @@
-//Adds games to the server-games table
+//Adds platforms to server-platforms to generate profile tabs
 
 'use strict';
 
-const uuid = require('uuid');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
     var params = {
-        TableName: process.env.GAME_TABLE,
+        TableName: process.env.PLATFORM_TABLE,
         Item: {
-            'id' : uuid.v1(),
             'platform' : event.platform,
-            'name' : event.name,
-            'cover' : event.cover
         },
+        ConditionExpression: 'attribute_not_exists(platform)' //puts item if it does not already exist
     };
 
     // Call DynamoDB to add the item to the table
@@ -27,4 +24,4 @@ module.exports.endpoint = (event, context, callback) => {
     });
 };
 
-// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-game?name=zelda&platform=NES&cover=www.gamecover.com
+// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-platform?platform=NES

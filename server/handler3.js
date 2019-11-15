@@ -1,13 +1,13 @@
+//Gets list of games from specific platform
+
 'use strict';
 
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
-
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
-
     var params = {
-        TableName : process.env.DYNAMODB_TABLE,
+        TableName : process.env.GAME_TABLE,
         FilterExpression: 'platform = :platform',
         ExpressionAttributeValues: { 
             ":platform" : event.platform,
@@ -24,4 +24,4 @@ module.exports.endpoint = (event, context, callback) => {
     });
 };
 
-// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/scan-data?platform=NES
+// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-games?platform=NES

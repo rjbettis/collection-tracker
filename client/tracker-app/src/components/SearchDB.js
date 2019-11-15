@@ -10,20 +10,17 @@ class Search extends Component {
     };
 
     handleOnChange = event => {
-
         this.setState({ searchValue: event.target.value });
     };
 
     handleSearch = (e) => {
-
         e.preventDefault();
         this.makeApiCall(this.state.searchValue);
         this.setState({displayResults: !this.state.displayQuestions})
     };
 
     makeApiCall = searchInput => {
-
-        var searchUrl = `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/game-details?search=${searchInput}`;
+        var searchUrl = `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/search-igdb?search=${searchInput}`;
 
         fetch(searchUrl)
         .then(response => {
@@ -33,7 +30,6 @@ class Search extends Component {
     };
 
     getStyle = () => {
-
         return {
             background: '#f4f4f4',
             padding: '10px',

@@ -11,11 +11,16 @@ class Results extends Component {
     };
 
     addGame(name, cover, platChecked) {
-        console.log(platChecked)
-        
-        var addGame = `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-data?name=${name}&platform=${platChecked}&cover=${cover}`;
+
+        var addGame = `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-game?name=${name}&platform=${platChecked}&cover=${cover}`;
+        var addPlatform = `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-platform?platform=${platChecked}`;
 
         fetch(addGame)
+        .then(response => {
+            return response.json();
+        });
+        
+        fetch(addPlatform)
         .then(response => {
             return response.json();
         });
@@ -42,7 +47,7 @@ class Results extends Component {
             
             const imageUrl = game.cover ? 'https://images.igdb.com/igdb/image/upload/t_cover_small/' + game.cover.image_id + '.jpg' : coverNotFound;
             var gameName = game["name"];
-
+            
             return (
                 <React.Fragment>
                     <p>
@@ -57,7 +62,11 @@ class Results extends Component {
                                                 <label>{abbr.abbreviation + " " }</label>
                                         </React.Fragment>
                                     )
-                            }) : <label>No Platform</label>}
+                            }) : <React.Fragment>
+                                    <input type="radio" name="platRadio" onChange={event => this.platCheck(event)} value={ "No Platform" } />
+                                    <label>{ "No Platform" }</label>
+                                 </React.Fragment>
+                            }
                             <br/><br/><br/>
                     </p>
                 </React.Fragment>

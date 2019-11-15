@@ -20,7 +20,8 @@ provider:
   name: aws
   runtime: nodejs10.x
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    GAME_TABLE: ${self:service}-games
+    PLATFORM_TABLE: ${self:service}-platforms
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -30,36 +31,49 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+      Resource: 
+        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TABLE}"
+        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.PLATFORM_TABLE}"
 
 functions:
-  get-details:
+  search-igdb:
     handler: handler.endpoint
     events:
       - http:
-          path: /game-details
+          path: /search-igdb
           method: GET
           cors: true
           integration: LAMBDA
           request:
             template:
               application/json: '{ "search" : "$input.params(''search'')" }'
-  add-data:
+  add-game:
     handler: handler2.endpoint
     events:
       - http:
-          path: /add-data
+          path: /add-game
           method: GET
           cors: true
           integration: LAMBDA
           request:
             template:
               application/json: '{ "name" : "$input.params(''name'')", "cover" : "$input.params(''cover'')", "platform" : "$input.params(''platform'')" }'
-  scan-data:
+  get-games:
     handler: handler3.endpoint
     events:
       - http:
-          path: /scan-data
+          path: /get-games
+          method: GET
+          cors: true
+          integration: LAMBDA
+          request:
+            template:
+              application/json: '{ "platform" : "$input.params(''platform'')" }'
+  add-platform:
+    handler: handler4.endpoint
+    events:
+      - http:
+          path: /add-platform
           method: GET
           cors: true
           integration: LAMBDA
@@ -92,4 +106,21 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        TableName: ${self:provider.environment.GAME_TABLE}
+
+    PlatformTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.PLATFORM_TABLE}
+        AttributeDefinitions:
+          - 
+            AttributeName: platform
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: platform
+            KeyType: HASH
+
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
