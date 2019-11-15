@@ -80,6 +80,14 @@ functions:
           request:
             template:
               application/json: '{ "platform" : "$input.params(''platform'')" }'
+  get-platform-tabs:
+    handler: handler5.endpoint
+    events:
+      - http:
+          path: /get-platform-tabs
+          method: GET
+          cors: true
+          integration: LAMBDA
 
 
 resources:
