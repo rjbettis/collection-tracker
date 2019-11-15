@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import coverNotFound from './../images/No_image_available.png'
+import coverNotFound from './images/No_image_available.png'
 
 var platChecked = '';
 

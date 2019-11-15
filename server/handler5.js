@@ -15,9 +15,9 @@ module.exports.endpoint = (event, context, callback) => {
         if(err){
             callback(err, null);
         }else{
-            callback(null, data);
+            callback(null, data.Items);
        }
     });
 };
 
-// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform
+// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform-tabs
