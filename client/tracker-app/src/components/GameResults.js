@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import coverNotFound from './images/No_image_available.png'
 
@@ -25,31 +24,33 @@ export class GameResults extends Component {
 
         return (
             <div>
-                { this.state.games.map((game) => {
+                { 
+                    this.state.games.map((game) => {
                     var cover = ""
-                    if (game.cover == "data:image/png") {
+                    if (game.cover === "data:image/png") {
                         cover = coverNotFound
                     } else {
                         cover = game.cover
                     }
                     
                     return( 
-                        <label> 
-                            <br/>
-                            { 
-                                game.name                           
-                            } 
-                            <br/>
-                            <img src={cover}></img>
-                            <br/>
-                        </label>
-                    )
+                        <React.Fragment>
+                            <div class="content">
+                                <img src={cover}></img>
+                                <div class="text">
+                                    <h4><strong>{game.name}</strong></h4>
+                                    <p>text</p>
+                                </div>
+                            </div>
+                            <hr/>
+                        </React.Fragment>
+                    )}) 
                     
-                }) }
-            
+                }
             </div>
         )
     }
 }
+
 
 export default GameResults;

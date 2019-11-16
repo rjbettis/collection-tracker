@@ -7,7 +7,7 @@ export class Profile extends Component {
         return (
             <div>
                 <h1>Profile</h1>
-                <p>Games filtered by platform</p>
+                <p>Filter collection by platform.</p>
                 <br/>
                 <Collection />
             </div>

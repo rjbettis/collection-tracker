@@ -31,15 +31,13 @@ class Search extends Component {
 
     getStyle = () => {
         return {
-            background: '#f4f4f4',
             padding: '10px',
         }
     }
 
     render() {
         return(
-            <div style={this.getStyle()}>
-                <h1>Search</h1>
+            <div>
                 <form onSubmit={this.handleSearch} style={{ display: 'flex' }}>
                     <input
                         type="text"
@@ -49,7 +47,6 @@ class Search extends Component {
                         onChange={event => this.handleOnChange(event)}
                         value={this.state.searchValue}
                     />
-                    
                     <input
                         type="submit"
                         value="Submit"

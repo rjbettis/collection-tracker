@@ -9,11 +9,6 @@ body {
   line-height: 1.4;
 }
 
-a {
-  color: #333;
-  text-decoration: none;
-}
-
 .container {
   padding: 0 1rem;
 }
@@ -30,3 +25,34 @@ a {
 .btn:hover {
   background: #666;
 }
+
+.content {
+  display: flex;
+}
+
+.content img {
+  margin-right: 10px;
+  display: block;
+  width: 7%;
+  height: auto;
+}
+
+
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: dotted;
+  border-width: 1px;
+}
+
+.added {
+  color: #000000;
+  display: flex;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+.added {background-color: #4CAF50;} /* Green */
