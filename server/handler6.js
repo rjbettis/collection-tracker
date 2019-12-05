@@ -25,4 +25,4 @@ module.exports.endpoint = (event, context, callback) => {
     });
 };
 
-// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/delete-game?id=
+// https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/delete-game?id=&platform=
