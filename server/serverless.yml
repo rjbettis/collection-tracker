@@ -88,6 +88,18 @@ functions:
           method: GET
           cors: true
           integration: LAMBDA
+  delete-game:
+    handler: handler6.endpoint
+    events:
+      - http:
+          path: /delete-game
+          method: GET
+          cors: true
+          integration: LAMBDA
+          request:
+            template:
+              application/json: '{ "id" : "$input.params(''id'')", "platform" : "$input.params(''platform'')" }'
+  
 
 
 resources:
