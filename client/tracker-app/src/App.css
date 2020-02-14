@@ -1,3 +1,5 @@
+/*
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -37,7 +39,6 @@ body {
   height: auto;
 }
 
-
 hr {
   display: block;
   margin-top: 0.5em;
@@ -55,4 +56,6 @@ hr {
   margin-bottom: 10px;
 }
 
-.added {background-color: #4CAF50;} /* Green */
+.added {
+  background-color: #4caf50;
+} /* Green */

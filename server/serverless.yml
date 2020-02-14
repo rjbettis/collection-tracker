@@ -18,13 +18,13 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: 
+      Resource:
         - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TABLE}"
         - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.PLATFORM_TABLE}"
 
 functions:
   search-igdb:
-    handler: handler.endpoint
+    handler: searchIgdb.endpoint
     events:
       - http:
           path: /search-igdb
@@ -35,7 +35,7 @@ functions:
             template:
               application/json: '{ "search" : "$input.params(''search'')" }'
   add-game:
-    handler: handler2.endpoint
+    handler: addGame.endpoint
     events:
       - http:
           path: /add-game
@@ -46,7 +46,7 @@ functions:
             template:
               application/json: '{ "name" : "$input.params(''name'')", "cover" : "$input.params(''cover'')", "platform" : "$input.params(''platform'')" }'
   get-games:
-    handler: handler3.endpoint
+    handler: getGames.endpoint
     events:
       - http:
           path: /get-games
@@ -57,7 +57,7 @@ functions:
             template:
               application/json: '{ "platform" : "$input.params(''platform'')" }'
   add-platform:
-    handler: handler4.endpoint
+    handler: addPlatform.endpoint
     events:
       - http:
           path: /add-platform
@@ -68,7 +68,7 @@ functions:
             template:
               application/json: '{ "platform" : "$input.params(''platform'')" }'
   get-platform-tabs:
-    handler: handler5.endpoint
+    handler: getPlatformTabs.endpoint
     events:
       - http:
           path: /get-platform-tabs
@@ -76,7 +76,7 @@ functions:
           cors: true
           integration: LAMBDA
   delete-game:
-    handler: handler6.endpoint
+    handler: deleteGame.endpoint
     events:
       - http:
           path: /delete-game
@@ -86,28 +86,22 @@ functions:
           request:
             template:
               application/json: '{ "id" : "$input.params(''id'')", "platform" : "$input.params(''platform'')" }'
-  
-
 
 resources:
   Resources:
     TodosDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
+      Type: "AWS::DynamoDB::Table"
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          -
-            AttributeName: id
+          - AttributeName: id
             AttributeType: S
-          - 
-            AttributeName: platform
+          - AttributeName: platform
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: id
+          - AttributeName: id
             KeyType: HASH
-          -
-            AttributeName: platform
+          - AttributeName: platform
             KeyType: RANGE
 
         ProvisionedThroughput:
@@ -120,12 +114,10 @@ resources:
       Properties:
         TableName: ${self:provider.environment.PLATFORM_TABLE}
         AttributeDefinitions:
-          - 
-            AttributeName: platform
+          - AttributeName: platform
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: platform
+          - AttributeName: platform
             KeyType: HASH
 
         ProvisionedThroughput:

@@ -1,48 +1,43 @@
-import React, { Component } from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import GameResults from './GameResults';
-import 'react-tabs/style/react-tabs.css';
+import React, { Component } from "react";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import GetCollection from "./GetCollection";
+import "react-tabs/style/react-tabs.css";
 
 export class Collection extends Component {
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-            platform: []
-        };
-      }
-    
-    componentDidMount() {
-        fetch('https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform-tabs')
-        .then(response => {
-            return response.json();
-        })
-        .then(res => this.setState( { platform:res }));
+  constructor(props) {
+    super(props);
 
-    }
-    
-    render() {
-        return (
-            <div>
-                <Tabs>
-                    <TabList>
-                        { 
-                            this.state.platform.map(plat => 
-                                <Tab>{ plat.platform }</Tab>) 
-                        }
-                    </TabList>
-                    { 
-                            this.state.platform.map(plat => 
-                                <TabPanel>
-                                    <GameResults platform={plat.platform}/>
-                                </TabPanel>) 
-                        }
+    this.state = {
+      platform: []
+    };
+  }
 
-                    
-                </Tabs>
-            </div>
-        )
-    }
+  async componentDidMount() {
+    const response = await fetch(
+      "https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform-tabs"
+    );
+    const res = await response.json();
+    this.setState({ platform: res });
+  }
+
+  render() {
+    return (
+      <div>
+        <Tabs>
+          <TabList>
+            {this.state.platform.map(plat => (
+              <Tab>{plat.platform}</Tab>
+            ))}
+          </TabList>
+          {this.state.platform.map(plat => (
+            <TabPanel>
+              <GetCollection platform={plat.platform} />
+            </TabPanel>
+          ))}
+        </Tabs>
+      </div>
+    );
+  }
 }
 
 export default Collection;

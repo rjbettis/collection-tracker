@@ -1,18 +1,16 @@
-import React, { Component } from 'react'
-import SearchDB from './../SearchDB';
+import React, { Component } from "react";
+import SearchDB from "./../SearchDB";
+import Container from "react-bootstrap/Container";
 
 export class Profile extends Component {
-    
-    render() {
-        return (
-            <div>
-                <h1>Search</h1>
-                <p>Search for games to add to your collection.</p>
-                <br/>
-                <SearchDB />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <Container>
+        <h1>Search</h1>
+        <SearchDB />
+      </Container>
+    );
+  }
 }
 
 export default Profile;
