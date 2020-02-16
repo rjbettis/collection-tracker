@@ -50,15 +50,19 @@ export class GetCollection extends Component {
 
           return (
             <React.Fragment>
-              <Card body>
+              <Card className="my-1">
                 <Media>
-                  <img width={100} height="auto" src={cover} alt="cover" />
-                  <Media.Body>
-                    <h4>
+                  <img className="mx-2 my-2" src={cover} alt="cover" />
+                  <Media.Body className="my-2">
+                    <h6>
                       <strong>{game.name}</strong>
-                    </h4>
+                    </h6>
+                    Completion
+                    <br />
+                    Condition
                   </Media.Body>
                   <Button
+                    className="my-2 mx-2"
                     variant="secondary"
                     type="submit"
                     onClick={e => this.removeGame(gameId, gamePlatform)}
