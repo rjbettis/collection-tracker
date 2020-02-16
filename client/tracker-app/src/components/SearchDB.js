@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Results from "./Results";
+import GetResults from "./GetResults";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -47,7 +47,7 @@ class SearchDB extends Component {
         </Form>
 
         {this.state.displayResults ? (
-          <Results searchResults={this.state.searchResults} />
+          <GetResults searchResults={this.state.searchResults} />
         ) : null}
       </React.Fragment>
     );

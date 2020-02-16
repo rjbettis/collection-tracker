@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navigation from "./components/Navigation";
 import Search from "./components/pages/Search";
-import Profile from "./components/pages/Profile";
+import Collection from "./components/pages/Collection";
 import "./App.css";
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
         <Container-Fluid>
           <Navigation />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/Collection" component={Collection} />
         </Container-Fluid>
       </Router>
     );

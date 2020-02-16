@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import Collection from "./../Collection";
+import CollectionTabs from "../CollectionTabs";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export class Profile extends Component {
+export class Collection extends Component {
   render() {
     return (
       <Container id="grey">
         <Row>
           <Col id="lightgrey">
-            <h1>Profile</h1>
+            <h1>My Collection</h1>
             <p>Filter collection by platform.</p>
-            <Collection />
+            <CollectionTabs />
           </Col>
         </Row>
       </Container>
@@ -20,4 +20,4 @@ export class Profile extends Component {
   }
 }
 
-export default Profile;
+export default Collection;

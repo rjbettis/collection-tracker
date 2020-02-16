@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import GetCollection from "./GetCollection";
 import "react-tabs/style/react-tabs.css";
 
-export class Collection extends Component {
+export class CollectionTabs extends Component {
   constructor(props) {
     super(props);
 
@@ -40,4 +40,4 @@ export class Collection extends Component {
   }
 }
 
-export default Collection;
+export default CollectionTabs;

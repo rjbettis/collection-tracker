@@ -6,12 +6,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Media from "react-bootstrap/Media";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 var platChecked = "";
 
-class Results extends Component {
+class GetResults extends Component {
   state = {
     addedName: "",
     addedPlat: "",
@@ -100,18 +98,13 @@ class Results extends Component {
       );
     });
 
-    return (
-      <div>
-        <h1>Results</h1>
-        {games2}
-      </div>
-    );
+    return <div>{games2}</div>;
   }
 }
 
 // PropTypes
-Results.propTypes = {
+GetResults.propTypes = {
   searchResults: PropTypes.array.isRequired
 };
 
-export default Results;
+export default GetResults;

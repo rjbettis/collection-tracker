@@ -8,7 +8,7 @@ function Navigation() {
       <Navbar.Brand href="/">Collection Tracker</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="/search">Search</Nav.Link>
-        <Nav.Link href="/profile">Profile</Nav.Link>
+        <Nav.Link href="/Collection">Collection</Nav.Link>
       </Nav>
     </Navbar>
   );
