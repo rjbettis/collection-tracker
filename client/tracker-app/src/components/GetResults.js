@@ -13,10 +13,11 @@ class GetResults extends Component {
   state = {
     addedName: "",
     addedPlat: "",
-    addedBool: false
+    addedBool: false,
+    addedGameId: null
   };
 
-  async addGame(name, cover, platChecked) {
+  async addGame(gameId,name, cover, platChecked) {
     //adds game to dynamodb game table
     const response = await fetch(
       `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-game?name=${name}&platform=${platChecked}&cover=${cover}`
@@ -30,6 +31,7 @@ class GetResults extends Component {
     const res2 = await response2.json();
 
     this.setState({
+      addedGameId:gameId,
       addedName: res,
       addedPlat: res2,
       addedBool: true
@@ -41,7 +43,10 @@ class GetResults extends Component {
   };
 
   render() {
-    const games2 = this.props.searchResults.map(game => {
+
+
+
+    const gamesList = this.props.searchResults.map(game => {
       const imageUrl = game.cover
         ? "https://images.igdb.com/igdb/image/upload/t_cover_big/" +
           game.cover.image_id +
@@ -68,7 +73,7 @@ class GetResults extends Component {
                         label={abbr.abbreviation}
                         type="radio"
                         name="platGroup"
-                        id={abbr.abbreviation}
+                        id={gameName+" "+abbr.abbreviation}
                         onChange={event => this.platCheck(event)}
                       />
                     );
@@ -88,9 +93,9 @@ class GetResults extends Component {
                 className="my-2 mx-2"
                 variant="secondary"
                 type="submit"
-                onClick={e => this.addGame(gameName, imageUrl, platChecked)}
+                onClick={e => this.addGame(game.id,gameName, imageUrl, platChecked)}
               >
-                Add Game
+                {this.state.addedGameId === game.id?'Good Job!':'Add Game'}
               </Button>
             </Media>
           </Card>
@@ -98,7 +103,7 @@ class GetResults extends Component {
       );
     });
 
-    return <div>{games2}</div>;
+    return <div>{gamesList}</div>;
   }
 }
 

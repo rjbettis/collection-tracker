@@ -38,7 +38,7 @@ export class GetCollection extends Component {
     return (
       <div>
         {this.state.games.map(game => {
-          var gameId = game["id"];
+          let gameId = game["id"];
           var gamePlatform = game["platform"];
 
           var cover = "";

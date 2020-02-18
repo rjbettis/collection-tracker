@@ -7,10 +7,15 @@ body {
   font-size: 16px;
 }
 
-#lightgrey {
+.lightgrey {
   height: 100%;
   background: lightgrey;
 }
+
+.lightgrey div {
+  background: darkgrey;
+}
+
 
 #green {
   height: 100%;

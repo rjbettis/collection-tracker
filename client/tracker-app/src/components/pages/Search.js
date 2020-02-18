@@ -9,7 +9,7 @@ export class Profile extends Component {
     return (
       <Container id="grey">
         <Row>
-          <Col id="lightgrey">
+          <Col className={'lightgrey'}>
             <h1>Search</h1>
             <SearchDB />
           </Col>

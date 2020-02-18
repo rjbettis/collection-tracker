@@ -15,11 +15,11 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Container-Fluid>
+        <Container fluid={true}>
           <Navigation />
           <Route exact path="/search" component={Search} />
           <Route exact path="/Collection" component={Collection} />
-        </Container-Fluid>
+        </Container>
       </Router>
     );
   }

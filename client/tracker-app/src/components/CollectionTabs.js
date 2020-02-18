@@ -12,6 +12,8 @@ export class CollectionTabs extends Component {
     };
   }
 
+
+
   async componentDidMount() {
     const response = await fetch(
       "https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform-tabs"
@@ -25,8 +27,8 @@ export class CollectionTabs extends Component {
       <div>
         <Tabs>
           <TabList>
-            {this.state.platform.map(plat => (
-              <Tab>{plat.platform}</Tab>
+            {this.state.platform.map((plat,index) => (
+              <Tab key={plat.platform}>{plat.platform}</Tab>
             ))}
           </TabList>
           {this.state.platform.map(plat => (
