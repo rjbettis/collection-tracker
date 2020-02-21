@@ -1,53 +1,53 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import coverNotFound from "./images/No_image_available.png";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Media from "react-bootstrap/Media";
-import Container from "react-bootstrap/Container";
-
-var platChecked = "";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import coverNotFound from './images/No_image_available.png';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Media from 'react-bootstrap/Media';
+import Container from 'react-bootstrap/Container';
 
 class GetResults extends Component {
   state = {
-    addedName: "",
-    addedPlat: "",
-    addedBool: false
+    addedName: null,
+    addedPlat: null,
+    platChecked: null
   };
 
-  async addGame(name, cover, platChecked) {
+  async addGame(gameId, name, cover, platChecked) {
+    console.log(platChecked);
     //adds game to dynamodb game table
-    const response = await fetch(
+    const addGame = await fetch(
       `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-game?name=${name}&platform=${platChecked}&cover=${cover}`
     );
-    const res = await response.json();
+    const addGameRes = await addGame.json();
 
     //adds platform to dynamodb platform table if it does not exist
-    const response2 = await fetch(
+    const addPlat = await fetch(
       `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/add-platform?platform=${platChecked}`
     );
-    const res2 = await response2.json();
+    const addPlatRes = await addPlat.json();
 
     this.setState({
-      addedName: res,
-      addedPlat: res2,
-      addedBool: true
+      addedName: addGameRes,
+      addedPlat: addPlatRes,
+      addedGameId: gameId
     });
   }
 
-  platCheck = event => {
-    platChecked = event.target.id;
-  };
+  platCheck(event, plat) {
+    console.log(event);
+    this.setState({ platChecked: plat });
+  }
 
   render() {
-    const games2 = this.props.searchResults.map(game => {
-      const imageUrl = game.cover
-        ? "https://images.igdb.com/igdb/image/upload/t_cover_big/" +
+    const gamesList = this.props.searchResults.map(game => {
+      let imageUrl = game.cover
+        ? 'https://images.igdb.com/igdb/image/upload/t_cover_big/' +
           game.cover.image_id +
-          ".jpg"
+          '.jpg'
         : coverNotFound;
-      var gameName = game["name"];
+      let gameName = game['name'];
 
       return (
         <Container>
@@ -68,8 +68,10 @@ class GetResults extends Component {
                         label={abbr.abbreviation}
                         type="radio"
                         name="platGroup"
-                        id={abbr.abbreviation}
-                        onChange={event => this.platCheck(event)}
+                        id={gameName + ' ' + abbr.abbreviation}
+                        onChange={event =>
+                          this.platCheck(event, abbr.abbreviation)
+                        }
                       />
                     );
                     //platform does not exist
@@ -79,7 +81,7 @@ class GetResults extends Component {
                     inline
                     label="No Platform"
                     type="radio"
-                    id={"No Platform"}
+                    id={'No Platform'}
                     onChange={event => this.platCheck(event)}
                   />
                 )}
@@ -88,9 +90,16 @@ class GetResults extends Component {
                 className="my-2 mx-2"
                 variant="secondary"
                 type="submit"
-                onClick={e => this.addGame(gameName, imageUrl, platChecked)}
+                onClick={e =>
+                  this.addGame(
+                    game.id,
+                    gameName,
+                    imageUrl,
+                    this.state.platChecked
+                  )
+                }
               >
-                Add Game
+                {this.state.addedGameId === game.id ? 'Added' : 'Add Game'}
               </Button>
             </Media>
           </Card>
@@ -98,7 +107,7 @@ class GetResults extends Component {
       );
     });
 
-    return <div>{games2}</div>;
+    return <div>{gamesList}</div>;
   }
 }
 

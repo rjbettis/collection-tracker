@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import "react-tabs/style/react-tabs.css";
-import coverNotFound from "./images/No_image_available.png";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Media from "react-bootstrap/Media";
+import React, { Component } from 'react';
+import 'react-tabs/style/react-tabs.css';
+import coverNotFound from './images/No_image_available.png';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Media from 'react-bootstrap/Media';
 
 export class GetCollection extends Component {
   constructor(props) {
@@ -38,11 +38,11 @@ export class GetCollection extends Component {
     return (
       <div>
         {this.state.games.map(game => {
-          var gameId = game["id"];
-          var gamePlatform = game["platform"];
+          let gameId = game['id'];
+          let gamePlatform = game['platform'];
 
-          var cover = "";
-          if (game.cover === "data:image/png") {
+          let cover = '';
+          if (game.cover === 'data:image/png') {
             cover = coverNotFound;
           } else {
             cover = game.cover;
