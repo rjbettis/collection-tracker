@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Media from 'react-bootstrap/Media';
+import coverNotFound from './images/No_image_available.png';
 
 class GetResults extends Component {
   constructor(props) {
@@ -24,11 +25,11 @@ class GetResults extends Component {
     return this.props.searchResults ? (
       <Container>
         {this.props.searchResults.games.map((game, index) => {
-          let imageUrl =
-            'https://cdn.thegamesdb.net/images/thumb/' +
-            this.props.boxart.boxart.data[game.id][0].filename;
+          //let imageUrl =
+          //'https://cdn.thegamesdb.net/images/thumb/' +
+          //this.props.boxart.boxart.data[game.id][0].filename;
 
-          return (
+          return this.props.boxart.boxart.data[game.id] ? (
             <Container key={game.game_title}>
               <Card className="my-1">
                 <Media>
@@ -51,6 +52,8 @@ class GetResults extends Component {
                 </Media>
               </Card>
             </Container>
+          ) : (
+            <Container></Container>
           );
         })}
       </Container>
