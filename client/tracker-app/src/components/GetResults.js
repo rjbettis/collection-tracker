@@ -30,6 +30,7 @@ class GetResults extends Component {
           //this.props.boxart.boxart.data[game.id][0].filename;
 
           return this.props.boxart.boxart.data[game.id] ? (
+            //runs if there is an image
             <Container key={game.game_title}>
               <Card className="my-1">
                 <Media>
@@ -53,7 +54,20 @@ class GetResults extends Component {
               </Card>
             </Container>
           ) : (
-            <Container></Container>
+            //runs if there is NOT an image
+            <Container key={game.game_title}>
+              <Card className="my-1">
+                <Media>
+                  <img className="mx-2 my-2" src={coverNotFound} />
+                  <Media.Body className="my-2">
+                    <h6>
+                      <strong>{game.game_title}</strong>
+                      {}
+                    </h6>
+                  </Media.Body>
+                </Media>
+              </Card>
+            </Container>
           );
         })}
       </Container>
