@@ -9,7 +9,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    details: []
+    details: [],
   };
 
   render() {
@@ -17,7 +17,7 @@ class App extends Component {
       <Router>
         <Container fluid={true}>
           <Navigation />
-          <Route exact path="/search" component={Search} />
+          <Route exact path="/Search" component={Search} />
           <Route exact path="/collection" component={Collection} />
         </Container>
       </Router>

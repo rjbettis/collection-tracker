@@ -11,11 +11,13 @@ export class GetCollection extends Component {
 
     this.state = {
       games: [],
-      removed: []
+      removed: [],
+      test: [],
     };
   }
 
   async componentDidMount() {
+    this.setState({ test: this.props.platform });
     this.loadGames();
   }
 
@@ -37,7 +39,7 @@ export class GetCollection extends Component {
   render() {
     return (
       <div>
-        {this.state.games.map(game => {
+        {this.state.games.map((game) => {
           let gameId = game['id'];
           let gamePlatform = game['platform'];
 
@@ -65,7 +67,7 @@ export class GetCollection extends Component {
                     className="my-2 mx-2"
                     variant="secondary"
                     type="submit"
-                    onClick={e => this.removeGame(gameId, gamePlatform)}
+                    onClick={(e) => this.removeGame(gameId, gamePlatform)}
                   >
                     Remove Game
                   </Button>

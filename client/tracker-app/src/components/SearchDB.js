@@ -4,17 +4,20 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 class SearchDB extends Component {
-  state = {
-    searchValue: '',
-    displayResults: false,
-    searchResults: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchValue: '',
+      displayResults: false,
+      searchResults: {},
+    };
+  }
 
-  handleOnChange = event => {
+  handleOnChange = (event) => {
     this.setState({ searchValue: event.target.value });
   };
 
-  handleSearch = e => {
+  handleSearch = (e) => {
     e.preventDefault();
     this.makeApiCall(this.state.searchValue);
     this.setState({ displayResults: !this.state.displayQuestions });
@@ -22,7 +25,7 @@ class SearchDB extends Component {
 
   async makeApiCall(searchInput) {
     const response = await fetch(
-      `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/search-igdb?search=${searchInput}`
+      `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/search-tgdb?search=${searchInput}`
     );
     const res = await response.json();
     this.setState({ searchResults: res });
@@ -36,7 +39,7 @@ class SearchDB extends Component {
             <Form.Label>Search for games to add to your collection.</Form.Label>
             <Form.Control
               placeholder="Add Game"
-              onChange={event => this.handleOnChange(event)}
+              onChange={(event) => this.handleOnChange(event)}
               value={this.state.searchValue}
             />
           </Form.Group>
@@ -47,7 +50,10 @@ class SearchDB extends Component {
         </Form>
 
         {this.state.displayResults ? (
-          <GetResults searchResults={this.state.searchResults} />
+          <GetResults
+            searchResults={this.state.searchResults.data}
+            boxart={this.state.searchResults.include}
+          />
         ) : null}
       </React.Fragment>
     );

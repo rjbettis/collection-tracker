@@ -8,7 +8,7 @@ export class CollectionTabs extends Component {
     super(props);
 
     this.state = {
-      platform: []
+      platform: [],
     };
   }
 
@@ -25,11 +25,11 @@ export class CollectionTabs extends Component {
       <div>
         <Tabs>
           <TabList>
-            {this.state.platform.map(plat => (
+            {this.state.platform.map((plat) => (
               <Tab key={plat.platform}>{plat.platform}</Tab>
             ))}
           </TabList>
-          {this.state.platform.map(plat => (
+          {this.state.platform.map((plat) => (
             <TabPanel>
               <GetCollection platform={plat.platform} />
             </TabPanel>

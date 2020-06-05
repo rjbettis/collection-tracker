@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export class Profile extends Component {
+export class Search extends Component {
   render() {
     return (
       <Container>
@@ -19,4 +19,4 @@ export class Profile extends Component {
   }
 }
 
-export default Profile;
+export default Search;
