@@ -9,10 +9,11 @@ class SearchDB extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchValue: null,
-      displayResults: false,
+      searchValue: '',
+      displayResults: '',
       searchResults: {},
       platform: '',
+      searchPrompt: 'Search for games to add to your collection.',
       nintendoBtn: 'Nintendo',
     };
   }
@@ -22,9 +23,14 @@ class SearchDB extends Component {
   };
 
   handleSearch = (e) => {
-    e.preventDefault();
-    this.makeApiCall(this.state.searchValue, this.state.platform);
-    this.setState({ displayResults: !this.state.displayQuestions });
+    if (this.state.nintendoBtn === 'Nintendo') {
+      e.preventDefault();
+      this.setState({ searchPrompt: 'Please choose a console platform' });
+    } else {
+      e.preventDefault();
+      this.makeApiCall(this.state.searchValue, this.state.platform);
+      this.setState({ displayResults: !this.state.displayQuestions });
+    }
   };
 
   async makeApiCall(searchInput, platform) {
@@ -67,7 +73,7 @@ class SearchDB extends Component {
         this.setState({ nintendoBtn: 'Nintendo Entertainment System (NES)' });
         break;
       case '3':
-        this.setState({ nintendoBtn: 'N64' });
+        this.setState({ nintendoBtn: 'Nintendo 64' });
         break;
       case '4957':
         this.setState({ nintendoBtn: 'Pokémon Mini' });
@@ -87,6 +93,8 @@ class SearchDB extends Component {
       case '38':
         this.setState({ nintendoBtn: 'Wii U' });
         break;
+      default:
+        this.setState({ nintendoBtn: 'Nintendo' });
     }
   };
 
@@ -111,7 +119,7 @@ class SearchDB extends Component {
           <Dropdown.Item eventKey="7">
             Nintendo Entertainment System (NES)
           </Dropdown.Item>
-          <Dropdown.Item eventKey="3">N64</Dropdown.Item>
+          <Dropdown.Item eventKey="3">Nintendo 64</Dropdown.Item>
           <Dropdown.Item eventKey="4957">Pokémon Mini</Dropdown.Item>
           <Dropdown.Item eventKey="6">Super Nintendo (SNES)</Dropdown.Item>
           <Dropdown.Item eventKey="4971">Switch</Dropdown.Item>
@@ -122,7 +130,7 @@ class SearchDB extends Component {
 
         <Form onSubmit={this.handleSearch}>
           <Form.Group controlId="formSearch">
-            <Form.Label>Search for games to add to your collection.</Form.Label>
+            <Form.Label>{this.state.searchPrompt}</Form.Label>
 
             <Form.Control
               placeholder="Add Game"
@@ -140,6 +148,7 @@ class SearchDB extends Component {
           <GetResults
             searchResults={this.state.searchResults.data}
             boxart={this.state.searchResults.include}
+            platform={this.state.nintendoBtn}
           />
         ) : null}
       </React.Fragment>
