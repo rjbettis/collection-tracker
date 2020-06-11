@@ -8,11 +8,13 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Image from 'react-bootstrap/Image';
 
 class GetResults extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      test: false,
+    };
   }
 
   componentDidMount() {
@@ -23,6 +25,22 @@ class GetResults extends Component {
       manualCheckbox: false,
       boxCheckbox: false,
     });
+  }
+
+  async addGame(coverUrl, gameName, platform, completeness) {
+    //gets list of platforms in database
+    const response = await fetch(
+      'https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform-tabs'
+    );
+    const res = await response.json();
+    this.setState({ platform: res });
+
+    this.state.platform.forEach((plat, index) => {
+      if (plat.platform !== this.props.platform) {
+        this.addPlatformApiCall(coverUrl, gameName, platform, completeness);
+      }
+    });
+    this.addGameApiCall(coverUrl, gameName, platform, completeness);
   }
 
   async addGameApiCall(coverUrl, gameName, platform, completeness) {
@@ -45,28 +63,8 @@ class GetResults extends Component {
     });
   }
 
-  async addGame(coverUrl, gameName, platform, completeness) {
-    //gets list of platforms in database
-    const response = await fetch(
-      'https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform-tabs'
-    );
-    const res = await response.json();
-    this.setState({ platform: res });
-
-    this.state.platform.forEach((plat, index) => {
-      if (plat.platform !== this.props.platform) {
-        this.addPlatformApiCall(coverUrl, gameName, platform, completeness);
-      }
-    });
-    this.addGameApiCall(coverUrl, gameName, platform, completeness);
-  }
-
   handleShow(title, cover) {
     this.setState({ showModal: true, gameTitle: title, gameCover: cover });
-  }
-
-  handleClose() {
-    this.setState({ showModal: false });
   }
 
   handleClose() {
@@ -98,64 +96,73 @@ class GetResults extends Component {
   }
 
   handleSubmit(event) {
+    let completeness = '';
     if (
       this.state.cartCheckbox === true &&
       this.state.manualCheckbox === true &&
       this.state.boxCheckbox === true
     ) {
-      this.setState({ completeness: 'Complete in Box' });
+      completeness = 'Complete in Box';
     } else if (
       this.state.cartCheckbox &&
       !this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
-      this.setState({ completeness: 'Cart Only' });
+      completeness = 'Cart Only';
     } else if (
       !this.state.cartCheckbox &&
       this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
-      this.setState({ completeness: 'Manual Only' });
+      completeness = 'Manual Only';
     } else if (
       !this.state.cartCheckbox &&
       !this.state.manualCheckbox &&
       this.state.boxCheckbox
     ) {
-      this.setState({ completeness: 'Box Only' });
+      completeness = 'Box Only';
     } else if (
       this.state.cartCheckbox &&
       !this.state.manualCheckbox &&
       this.state.boxCheckbox
     ) {
-      this.setState({ completeness: 'Cart & Box' });
+      completeness = 'Cart and Box';
     } else if (
       !this.state.cartCheckbox &&
       this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
-      this.setState({ completeness: 'Manual & Box' });
+      completeness = 'Manual and Box';
     } else if (
       this.state.cartCheckbox &&
       this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
-      this.setState({ completeness: 'Cart & Manual' });
+      completeness = 'Cart and Manual';
     } else if (
       !this.state.cartCheckbox &&
       this.state.manualCheckbox &&
       this.state.boxCheckbox
     ) {
-      this.setState({ completeness: 'Manual & Box' });
+      completeness = 'Manual and Box';
+    } else if (
+      !this.state.cartCheckbox &&
+      !this.state.manualCheckbox &&
+      !this.state.boxCheckbox
+    ) {
+      completeness = 'None';
     }
 
-    if (this.state.completeness) {
-      this.addGame(
-        this.state.gameCover,
-        this.state.gameTitle,
-        this.props.platform,
-        this.state.completeness
-      );
-    }
+    console.log(completeness);
+
+    this.addGame(
+      this.state.gameCover,
+      this.state.gameTitle,
+      this.props.platform,
+      completeness
+    );
+
+    this.handleClose();
   }
 
   render() {
@@ -181,6 +188,7 @@ class GetResults extends Component {
                   Select the completeness that applies.
                   <br />
                   <br />
+                  {this.state.selectCompleteness}
                   <Form.Check
                     type="checkbox"
                     label="Cart"

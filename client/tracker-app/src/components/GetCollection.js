@@ -59,9 +59,7 @@ export class GetCollection extends Component {
                     <h6>
                       <strong>{game.name}</strong>
                     </h6>
-                    Completion
-                    <br />
-                    Condition
+                    {game.completeness}
                   </Media.Body>
                   <Button
                     className="my-2 mx-2"
