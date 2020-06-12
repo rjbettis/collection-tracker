@@ -19,21 +19,21 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TABLE}"
-        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.PLATFORM_TABLE}"
+        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TABLE}'
+        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.PLATFORM_TABLE}'
 
 functions:
-  search-igdb:
-    handler: searchIgdb.endpoint
+  search-tgdb:
+    handler: searchGamesDb.endpoint
     events:
       - http:
-          path: /search-igdb
+          path: /search-tgdb
           method: GET
           cors: true
           integration: LAMBDA
           request:
             template:
-              application/json: '{ "search" : "$input.params(''search'')" }'
+              application/json: '{ "search" : "$input.params(''search'')", "platform" : "$input.params(''platform'')" }'
   add-game:
     handler: addGame.endpoint
     events:
@@ -44,7 +44,7 @@ functions:
           integration: LAMBDA
           request:
             template:
-              application/json: '{ "name" : "$input.params(''name'')", "cover" : "$input.params(''cover'')", "platform" : "$input.params(''platform'')" }'
+              application/json: '{ "name" : "$input.params(''name'')", "cover" : "$input.params(''cover'')", "platform" : "$input.params(''platform'')", "completeness" : "$input.params(''completeness'')", "developer" : "$input.params(''developer'')" }'
   get-games:
     handler: getGames.endpoint
     events:
@@ -86,11 +86,19 @@ functions:
           request:
             template:
               application/json: '{ "id" : "$input.params(''id'')", "platform" : "$input.params(''platform'')" }'
+  get-timeline:
+    handler: getTimeline.endpoint
+    events:
+      - http:
+          path: /get-timeline
+          method: GET
+          cors: true
+          integration: LAMBDA
 
 resources:
   Resources:
     TodosDynamoDbTable:
-      Type: "AWS::DynamoDB::Table"
+      Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:

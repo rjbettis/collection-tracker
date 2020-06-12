@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import PlatformList from '../data/platforms.json';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 class SearchDB extends Component {
   constructor(props) {
@@ -15,7 +17,12 @@ class SearchDB extends Component {
       platform: '',
       searchPrompt: 'Search for games to add to your collection.',
       nintendoBtn: 'Nintendo',
+      segaBtn: 'Sega',
     };
+  }
+
+  componentDidMount() {
+    this.setState({ platformList: PlatformList.platforms });
   }
 
   handleOnChange = (event) => {
@@ -23,7 +30,11 @@ class SearchDB extends Component {
   };
 
   handleSearch = (e) => {
-    if (this.state.nintendoBtn === 'Nintendo') {
+    if (
+      (this.state.nintendoBtn === 'Nintendo' &&
+        !this.state.segaBtn === 'Sega') ||
+      (!this.state.nintendoBtn === 'Nintendo' && this.state.segaBtn === 'Sega')
+    ) {
       e.preventDefault();
       this.setState({ searchPrompt: 'Please choose a console platform' });
     } else {
@@ -41,92 +52,85 @@ class SearchDB extends Component {
     this.setState({ searchResults: res });
   }
 
-  handleSelect = (event) => {
+  handleNintendoSelect = (event) => {
     this.setState({ platform: event });
+    this.setState({ segaBtn: 'Sega' });
+    this.setState({ displayResults: false });
+    this.setState({ searchValue: '' });
+    let selectedPlatformId = event;
 
-    switch (event) {
-      case '4912':
-        this.setState({ nintendoBtn: '3DS' });
-        break;
-      case '8':
-        this.setState({ nintendoBtn: 'DS' });
-        break;
-      case '4936':
-        this.setState({ nintendoBtn: 'Famicom Disk System' });
-        break;
-      case '4950':
-        this.setState({ nintendoBtn: 'Game & Watch' });
-        break;
-      case '4':
-        this.setState({ nintendoBtn: 'Game Boy' });
-        break;
-      case '5':
-        this.setState({ nintendoBtn: 'Game Boy Advance' });
-        break;
-      case '41':
-        this.setState({ nintendoBtn: 'Game Boy Color' });
-        break;
-      case '2':
-        this.setState({ nintendoBtn: 'GameCube' });
-        break;
-      case '7':
-        this.setState({ nintendoBtn: 'Nintendo Entertainment System (NES)' });
-        break;
-      case '3':
-        this.setState({ nintendoBtn: 'Nintendo 64' });
-        break;
-      case '4957':
-        this.setState({ nintendoBtn: 'Pokémon Mini' });
-        break;
-      case '6':
-        this.setState({ nintendoBtn: 'Super Nintendo (SNES)' });
-        break;
-      case '4971':
-        this.setState({ nintendoBtn: 'Switch' });
-        break;
-      case '4918':
-        this.setState({ nintendoBtn: 'Virtual Boy' });
-        break;
-      case '9':
-        this.setState({ nintendoBtn: 'Wii' });
-        break;
-      case '38':
-        this.setState({ nintendoBtn: 'Wii U' });
-        break;
-      default:
-        this.setState({ nintendoBtn: 'Nintendo' });
-    }
+    this.state.platformList.forEach((plat, index) => {
+      if (selectedPlatformId === plat.id) {
+        this.setState({ nintendoBtn: plat.name });
+      }
+    });
+  };
+
+  handleSegaSelect = (event) => {
+    this.setState({ platform: event });
+    this.setState({ nintendoBtn: 'Nintendo' });
+    this.setState({ displayResults: false });
+    this.setState({ searchValue: '' });
+    let selectedPlatformId = event;
+
+    this.state.platformList.forEach((plat, index) => {
+      if (selectedPlatformId === plat.id) {
+        this.setState({ segaBtn: plat.name });
+      }
+    });
   };
 
   render() {
     return (
       <React.Fragment>
-        <DropdownButton
-          id="dropdown-basic-button"
-          title={this.state.nintendoBtn}
-          size="sm"
-          variant="secondary"
-          onSelect={(event) => this.handleSelect(event)}
-        >
-          <Dropdown.Item eventKey="4912">3DS</Dropdown.Item>
-          <Dropdown.Item eventKey="8">DS</Dropdown.Item>
-          <Dropdown.Item eventKey="4936">Famicom Disk System</Dropdown.Item>
-          <Dropdown.Item eventKey="4950">Game &amp; Watch</Dropdown.Item>
-          <Dropdown.Item eventKey="4">Game Boy</Dropdown.Item>
-          <Dropdown.Item eventKey="5">Game Boy Advanced</Dropdown.Item>
-          <Dropdown.Item eventKey="41">Game Boy Color</Dropdown.Item>
-          <Dropdown.Item eventKey="2">GameCube</Dropdown.Item>
-          <Dropdown.Item eventKey="7">
-            Nintendo Entertainment System (NES)
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="3">Nintendo 64</Dropdown.Item>
-          <Dropdown.Item eventKey="4957">Pokémon Mini</Dropdown.Item>
-          <Dropdown.Item eventKey="6">Super Nintendo (SNES)</Dropdown.Item>
-          <Dropdown.Item eventKey="4971">Switch</Dropdown.Item>
-          <Dropdown.Item eventKey="4918">Virtual Boy</Dropdown.Item>
-          <Dropdown.Item eventKey="9">Wii</Dropdown.Item>
-          <Dropdown.Item eventKey="38">Wii U</Dropdown.Item>
-        </DropdownButton>
+        <ButtonGroup className="mr-2">
+          <DropdownButton
+            id="dropdown-basic-button"
+            title={this.state.nintendoBtn}
+            size="sm"
+            variant="secondary"
+            onSelect={(event) => this.handleNintendoSelect(event)}
+          >
+            <Dropdown.Item eventKey="4912">3DS</Dropdown.Item>
+            <Dropdown.Item eventKey="8">DS</Dropdown.Item>
+            <Dropdown.Item eventKey="4936">Famicom Disk System</Dropdown.Item>
+            <Dropdown.Item eventKey="4950">Game &amp; Watch</Dropdown.Item>
+            <Dropdown.Item eventKey="4">Game Boy</Dropdown.Item>
+            <Dropdown.Item eventKey="5">Game Boy Advanced</Dropdown.Item>
+            <Dropdown.Item eventKey="41">Game Boy Color</Dropdown.Item>
+            <Dropdown.Item eventKey="2">GameCube</Dropdown.Item>
+            <Dropdown.Item eventKey="7">
+              Nintendo Entertainment System (NES)
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="3">Nintendo 64</Dropdown.Item>
+            <Dropdown.Item eventKey="4957">Pokémon Mini</Dropdown.Item>
+            <Dropdown.Item eventKey="6">Super Nintendo (SNES)</Dropdown.Item>
+            <Dropdown.Item eventKey="4971">Switch</Dropdown.Item>
+            <Dropdown.Item eventKey="4918">Virtual Boy</Dropdown.Item>
+            <Dropdown.Item eventKey="9">Wii</Dropdown.Item>
+            <Dropdown.Item eventKey="38">Wii U</Dropdown.Item>
+          </DropdownButton>
+        </ButtonGroup>
+
+        <ButtonGroup className="mr-2">
+          <DropdownButton
+            id="dropdown-basic-button"
+            title={this.state.segaBtn}
+            size="sm"
+            variant="secondary"
+            onSelect={(event) => this.handleSegaSelect(event)}
+          >
+            <Dropdown.Item eventKey="33">32X</Dropdown.Item>
+            <Dropdown.Item eventKey="21">Sega CD</Dropdown.Item>
+            <Dropdown.Item eventKey="16">Dreamcast</Dropdown.Item>
+            <Dropdown.Item eventKey="20">Game Gear &amp; Watch</Dropdown.Item>
+            <Dropdown.Item eventKey="18">Genesis</Dropdown.Item>
+            <Dropdown.Item eventKey="35">Master System</Dropdown.Item>
+            <Dropdown.Item eventKey="36">Mega Drive</Dropdown.Item>
+            <Dropdown.Item eventKey="4958">Pico</Dropdown.Item>
+            <Dropdown.Item eventKey="4949">SG-1000</Dropdown.Item>
+          </DropdownButton>
+        </ButtonGroup>
 
         <Form onSubmit={this.handleSearch}>
           <Form.Group controlId="formSearch">
@@ -148,7 +152,7 @@ class SearchDB extends Component {
           <GetResults
             searchResults={this.state.searchResults.data}
             boxart={this.state.searchResults.include}
-            platform={this.state.nintendoBtn}
+            platform={this.state.platform}
           />
         ) : null}
       </React.Fragment>

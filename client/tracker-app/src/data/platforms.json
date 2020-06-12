@@ -1,0 +1,453 @@
+{
+  "platforms": [
+    {
+      "id": "1",
+      "name": "PC"
+    },
+    {
+      "id": "2",
+      "name": "GameCube"
+    },
+    {
+      "id": "3",
+      "name": "Nintendo 64"
+    },
+    {
+      "id": "4",
+      "name": "Game Boy"
+    },
+    {
+      "id": "5",
+      "name": "Game Boy Advance"
+    },
+    {
+      "id": "6",
+      "name": "Super Nintendo (SNES)"
+    },
+    {
+      "id": "7",
+      "name": "Nintendo Entertainment System (NES)"
+    },
+    {
+      "id": "8",
+      "name": "DS"
+    },
+    {
+      "id": "9",
+      "name": "Wii"
+    },
+    {
+      "id": "11",
+      "name": "Sony Playstation 2"
+    },
+    {
+      "id": "10",
+      "name": "Sony Playstation"
+    },
+    {
+      "id": "12",
+      "name": "Sony Playstation 3"
+    },
+    {
+      "id": "13",
+      "name": "Sony Playstation Portable"
+    },
+    {
+      "id": "14",
+      "name": "Microsoft Xbox"
+    },
+    {
+      "id": "15",
+      "name": "Microsoft Xbox 360"
+    },
+    {
+      "id": "16",
+      "name": "Dreamcast"
+    },
+    {
+      "id": "17",
+      "name": "Saturn"
+    },
+    {
+      "id": "18",
+      "name": "Genesis"
+    },
+    {
+      "id": "20",
+      "name": "Game Gear"
+    },
+    {
+      "id": "21",
+      "name": "Sega CD"
+    },
+    {
+      "id": "22",
+      "name": "Atari 2600"
+    },
+    {
+      "id": "23",
+      "name": "Arcade"
+    },
+    {
+      "id": "24",
+      "name": "Neo Geo"
+    },
+    {
+      "id": "25",
+      "name": "3DO"
+    },
+    {
+      "id": "26",
+      "name": "Atari 5200"
+    },
+    {
+      "id": "27",
+      "name": "Atari 7800"
+    },
+    {
+      "id": "28",
+      "name": "Atari Jaguar"
+    },
+    {
+      "id": "29",
+      "name": "Atari Jaguar CD"
+    },
+    {
+      "id": "30",
+      "name": "Atari XE"
+    },
+    {
+      "id": "31",
+      "name": "Colecovision"
+    },
+    {
+      "id": "32",
+      "name": "Intellivision"
+    },
+    {
+      "id": "33",
+      "name": "32X"
+    },
+    {
+      "id": "34",
+      "name": "TurboGrafx 16"
+    },
+    {
+      "id": "35",
+      "name": "Master System"
+    },
+    {
+      "id": "36",
+      "name": "Mega Drive"
+    },
+    {
+      "id": "37",
+      "name": "Mac OS"
+    },
+    {
+      "id": "38",
+      "name": "Wii U"
+    },
+    {
+      "id": "39",
+      "name": "Playstation Vita"
+    },
+    {
+      "id": "40",
+      "name": "Commodore 64"
+    },
+    {
+      "id": "41",
+      "name": "Game Boy Color"
+    },
+    {
+      "id": "4911",
+      "name": "Amiga"
+    },
+    {
+      "id": "4912",
+      "name": "3DS"
+    },
+    {
+      "id": "4913",
+      "name": "Sinclair ZX Spectrum"
+    },
+    {
+      "id": "4914",
+      "name": "Amstrad CPC"
+    },
+    {
+      "id": "4915",
+      "name": "iOS"
+    },
+    {
+      "id": "4916",
+      "name": "Android"
+    },
+    {
+      "id": "4917",
+      "name": "CD-i"
+    },
+    {
+      "id": "4918",
+      "name": "Virtual Boy"
+    },
+    {
+      "id": "4919",
+      "name": "Playstation 4"
+    },
+    {
+      "id": "4920",
+      "name": "Xbox One"
+    },
+    {
+      "id": "4921",
+      "name": "Ouya"
+    },
+    {
+      "id": "4922",
+      "name": "Neo Geo Pocket"
+    },
+    {
+      "id": "4923",
+      "name": "Neo Geo Pocket Color"
+    },
+    {
+      "id": "4925",
+      "name": "WonderSwan"
+    },
+    {
+      "id": "4926",
+      "name": "WonderSwan Color"
+    },
+    {
+      "id": "4927",
+      "name": "Magnavox Odyssey 2"
+    },
+    { "id": "4928", "name": "Fairchild Channel F" },
+    {
+      "id": "4929",
+      "name": "MSX"
+    },
+    {
+      "id": "4930",
+      "name": "PC-FX"
+    },
+    {
+      "id": "4931",
+      "name": "Sharp X68000"
+    },
+    {
+      "id": "4932",
+      "name": "FM Towns Marty"
+    },
+    {
+      "id": "4933",
+      "name": "PC-88"
+    },
+    {
+      "id": "4934",
+      "name": "PC-98"
+    },
+    {
+      "id": "4935",
+      "name": "Nuon"
+    },
+    {
+      "id": "4936",
+      "name": "Famicom Disk System"
+    },
+    {
+      "id": "4937",
+      "name": "Atari ST"
+    },
+    {
+      "id": "4938",
+      "name": "N-Gage"
+    },
+    {
+      "id": "4939",
+      "name": "Vectrex"
+    },
+    {
+      "id": "4940",
+      "name": "Game.com"
+    },
+    {
+      "id": "4941",
+      "name": "TRS-80 Color Computer"
+    },
+    {
+      "id": "4942",
+      "name": "Apple II"
+    },
+    {
+      "id": "4943",
+      "name": "Atari 800"
+    },
+    {
+      "id": "4944",
+      "name": "Acorn Archimedes"
+    },
+    {
+      "id": "4945",
+      "name": "Commodore VIC-20"
+    },
+    {
+      "id": "4946",
+      "name": "Commodore 128"
+    },
+    {
+      "id": "4947",
+      "name": "Amiga CD32"
+    },
+    {
+      "id": "4948",
+      "name": "Mega Duck"
+    },
+    {
+      "id": "4949",
+      "name": "SG-1000"
+    },
+    {
+      "id": "4950",
+      "name": "Game & Watch"
+    },
+    {
+      "id": "4951",
+      "name": "Handheld Electronic Games (LCD)"
+    },
+    {
+      "id": "4952",
+      "name": "Dragon 32/64"
+    },
+    {
+      "id": "4953",
+      "name": "Texas Instruments TI-99/4A"
+    },
+    {
+      "id": "4954",
+      "name": "Acorn Electron"
+    },
+    {
+      "id": "4955",
+      "name": "TurboGrafx CD"
+    },
+    {
+      "id": "4956",
+      "name": "Neo Geo CD"
+    },
+    {
+      "id": "4957",
+      "name": "Nintendo Pokémon Mini"
+    },
+    {
+      "id": "4958",
+      "name": "Pico"
+    },
+    {
+      "id": "4959",
+      "name": "Watara Supervision"
+    },
+    {
+      "id": "4960",
+      "name": "Tomy Tutor"
+    },
+    {
+      "id": "4961",
+      "name": "Magnavox Odyssey 1"
+    },
+    {
+      "id": "4962",
+      "name": "Gakken Compact Vision"
+    },
+    {
+      "id": "4963",
+      "name": "Emerson Arcadia 2001"
+    },
+    {
+      "id": "4964",
+      "name": "Casio PV-1000"
+    },
+    {
+      "id": "4965",
+      "name": "Epoch Cassette Vision"
+    },
+    {
+      "id": "4966",
+      "name": "Epoch Super Cassette Vision"
+    },
+    {
+      "id": "4967",
+      "name": "RCA Studio II"
+    },
+    {
+      "id": "4968",
+      "name": "Bally Astrocade"
+    },
+    {
+      "id": "4969",
+      "name": "APF MP-1000"
+    },
+    {
+      "id": "4970",
+      "name": "Coleco Telstar Arcade"
+    },
+    {
+      "id": "4971",
+      "name": "Nintendo Switch"
+    },
+    {
+      "id": "4972",
+      "name": "Milton Bradley Microvision"
+    },
+    {
+      "id": "4973",
+      "name": "Entex Select-a-Game"
+    },
+    {
+      "id": "4974",
+      "name": "Entex Adventure Vision"
+    },
+    {
+      "id": "4975",
+      "name": "Pioneer LaserActive"
+    },
+    {
+      "id": "4976",
+      "name": "Action Max"
+    },
+    {
+      "id": "4977",
+      "name": "Sharp X1"
+    },
+    {
+      "id": "4978",
+      "name": "Fujitsu FM-7"
+    },
+    {
+      "id": "4979",
+      "name": "SAM Coupé"
+    },
+    {
+      "id": "4980",
+      "name": "Sony Playstation 5"
+    },
+    {
+      "id": "4981",
+      "name": "Microsoft Xbox Series X"
+    },
+    {
+      "id": "4982",
+      "name": "Tandy Visual Interactive System"
+    },
+    {
+      "id": "4983",
+      "name": "R-Zone"
+    },
+    {
+      "id": "4984",
+      "name": "Xavix Port"
+    }
+  ]
+}

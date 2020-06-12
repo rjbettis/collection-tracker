@@ -8,6 +8,8 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import DeveloperList from '../data/developers.json';
+import PlatformList from '../data/platforms.json';
 
 class GetResults extends Component {
   constructor(props) {
@@ -24,6 +26,13 @@ class GetResults extends Component {
       cartCheckbox: false,
       manualCheckbox: false,
       boxCheckbox: false,
+      completenessPrompt: 'Select the completeness that applies',
+    });
+
+    PlatformList.platforms.forEach((plat, index) => {
+      if (this.props.platform === plat.id) {
+        this.setState({ platformName: plat.name });
+      }
     });
   }
 
@@ -36,7 +45,7 @@ class GetResults extends Component {
     this.setState({ platform: res });
 
     this.state.platform.forEach((plat, index) => {
-      if (plat.platform !== this.props.platform) {
+      if (plat.platform !== this.state.platformName) {
         this.addPlatformApiCall(coverUrl, gameName, platform, completeness);
       }
     });
@@ -103,66 +112,115 @@ class GetResults extends Component {
       this.state.boxCheckbox === true
     ) {
       completeness = 'Complete in Box';
+      this.addGame(
+        this.state.gameCover,
+        this.state.gameTitle,
+        this.state.platformName,
+        completeness
+      );
+      this.handleClose();
     } else if (
       this.state.cartCheckbox &&
       !this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
       completeness = 'Cart Only';
+      this.addGame(
+        this.state.gameCover,
+        this.state.gameTitle,
+        this.state.platformName,
+        completeness
+      );
+      this.handleClose();
     } else if (
       !this.state.cartCheckbox &&
       this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
       completeness = 'Manual Only';
+      this.addGame(
+        this.state.gameCover,
+        this.state.gameTitle,
+        this.state.platformName,
+        completeness
+      );
+      this.handleClose();
     } else if (
       !this.state.cartCheckbox &&
       !this.state.manualCheckbox &&
       this.state.boxCheckbox
     ) {
       completeness = 'Box Only';
+      this.addGame(
+        this.state.gameCover,
+        this.state.gameTitle,
+        this.state.platformName,
+        completeness
+      );
+      this.handleClose();
     } else if (
       this.state.cartCheckbox &&
       !this.state.manualCheckbox &&
       this.state.boxCheckbox
     ) {
       completeness = 'Cart and Box';
+      this.addGame(
+        this.state.gameCover,
+        this.state.gameTitle,
+        this.state.platformName,
+        completeness
+      );
+      this.handleClose();
     } else if (
       !this.state.cartCheckbox &&
       this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
       completeness = 'Manual and Box';
+      this.addGame(
+        this.state.gameCover,
+        this.state.gameTitle,
+        this.state.platformName,
+        completeness
+      );
+      this.handleClose();
     } else if (
       this.state.cartCheckbox &&
       this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
       completeness = 'Cart and Manual';
+      this.addGame(
+        this.state.gameCover,
+        this.state.gameTitle,
+        this.state.platformName,
+        completeness
+      );
+      this.handleClose();
     } else if (
       !this.state.cartCheckbox &&
       this.state.manualCheckbox &&
       this.state.boxCheckbox
     ) {
       completeness = 'Manual and Box';
+      this.addGame(
+        this.state.gameCover,
+        this.state.gameTitle,
+        this.state.platformName,
+        completeness
+      );
+      this.handleClose();
     } else if (
       !this.state.cartCheckbox &&
       !this.state.manualCheckbox &&
       !this.state.boxCheckbox
     ) {
-      completeness = 'None';
+      this.setState({
+        completenessPrompt: 'You must select at least one option.',
+      });
     }
 
     console.log(completeness);
-
-    this.addGame(
-      this.state.gameCover,
-      this.state.gameTitle,
-      this.props.platform,
-      completeness
-    );
-
-    this.handleClose();
   }
 
   render() {
@@ -185,7 +243,7 @@ class GetResults extends Component {
                   <img key="cover" alt="gameCover" src={this.state.gameCover} />
                 </Form.Label>
                 <Col sm="auto">
-                  Select the completeness that applies.
+                  {this.state.completenessPrompt}
                   <br />
                   <br />
                   {this.state.selectCompleteness}
@@ -238,7 +296,8 @@ class GetResults extends Component {
 
             <Card className="my-1">
               <Media>
-                {this.props.boxart.boxart.data[game.id].map((img, index) => {
+                {//gets cover image
+                this.props.boxart.boxart.data[game.id].map((img, index) => {
                   if (img.side === 'front') {
                     coverUrl =
                       'https://cdn.thegamesdb.net/images/thumb/' + img.filename;
@@ -261,9 +320,9 @@ class GetResults extends Component {
                 <Media.Body className="my-2">
                   <strong>{game.game_title}</strong>
                   <br />
-                  {this.props.platform}
+                  {this.state.platformName}
                   <br />
-                  Released:{' ' + game.release_date}
+                  {game.release_date}
                 </Media.Body>
                 <Button
                   className="my-2 mx-2"
@@ -274,7 +333,7 @@ class GetResults extends Component {
                       game.game_title,
                       coverUrl,
                       game.release_date,
-                      this.props.platform
+                      this.state.platformName
                     )
                   }
                 >
@@ -292,9 +351,9 @@ class GetResults extends Component {
                 <Media.Body className="my-2">
                   <strong>{game.game_title}</strong>
                   <br />
-                  {this.props.platform}
+                  {this.state.platformName}
                   <br />
-                  Released:{' ' + game.release_date}
+                  {game.release_date}
                 </Media.Body>
                 <Button
                   className="my-2 mx-2"

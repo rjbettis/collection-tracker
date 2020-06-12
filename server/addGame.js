@@ -1,9 +1,9 @@
 //Adds games to the server-games table
 
-"use strict";
+'use strict';
 
-const uuid = require("uuid");
-const AWS = require("aws-sdk"); // eslint-disable-line import/no-extraneous-dependencies
+const uuid = require('uuid');
+const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
@@ -13,16 +13,18 @@ module.exports.endpoint = (event, context, callback) => {
       id: uuid.v1(),
       platform: event.platform,
       name: event.name,
-      cover: event.cover
-    }
+      cover: event.cover,
+      completeness: event.completeness,
+      developer: event.developer,
+    },
   };
 
   // Call DynamoDB to add the item to the table
-  dynamoDb.put(params, function(err, data) {
+  dynamoDb.put(params, function (err, data) {
     if (err) {
-      console.log("Error", err);
+      console.log('Error', err);
     } else {
-      console.log("Success", data);
+      console.log('Success', data);
     }
   });
 };
