@@ -8,20 +8,19 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import DeveloperList from '../data/developers.json';
 import PlatformList from '../data/platforms.json';
+import DeveloperList from '../data/developers.json';
 
 class GetResults extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: false,
+      developerList: DeveloperList,
     };
   }
 
   componentDidMount() {
     this.setState({
-      search: this.props.searchResults,
       showModal: false,
       cartCheckbox: false,
       manualCheckbox: false,
@@ -225,7 +224,7 @@ class GetResults extends Component {
 
   render() {
     return this.props.searchResults ? (
-      <Container>
+      <Container fluid>
         <Modal
           show={this.state.showModal}
           onHide={(event) => this.handleClose(event)}

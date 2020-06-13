@@ -1,0 +1,68 @@
+{
+  "platforms": [
+    {
+      "id": "4912",
+      "name": "3DS"
+    },
+    {
+      "id": "8",
+      "name": "DS"
+    },
+    {
+      "id": "4936",
+      "name": "Famicom Disk System"
+    },
+    {
+      "id": "4950",
+      "name": "Game & Watch"
+    },
+    {
+      "id": "4",
+      "name": "Game Boy"
+    },
+    {
+      "id": "5",
+      "name": "Game Boy Advanced"
+    },
+    {
+      "id": "41",
+      "name": "Game Boy Color"
+    },
+    {
+      "id": "2",
+      "name": "GameCube"
+    },
+    {
+      "id": "7",
+      "name": "Nintendo Entertainment System (NES)"
+    },
+    {
+      "id": "3",
+      "name": "Nintendo 64"
+    },
+    {
+      "id": "4957",
+      "name": "Pokémon Mini"
+    },
+    {
+      "id": "6",
+      "name": "Super Nintendo (SNES)"
+    },
+    {
+      "id": "4971",
+      "name": "Switch"
+    },
+    {
+      "id": "4918",
+      "name": "Virtual Boy"
+    },
+    {
+      "id": "9",
+      "name": "Wii"
+    },
+    {
+      "id": "38",
+      "name": "Wii U"
+    }
+  ]
+}

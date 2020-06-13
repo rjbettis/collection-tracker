@@ -1,0 +1,40 @@
+{
+  "platforms": [
+    {
+      "id": "33",
+      "name": "32X"
+    },
+    {
+      "id": "21",
+      "name": "Sega CD"
+    },
+    {
+      "id": "16",
+      "name": "Dreamcast"
+    },
+    {
+      "id": "20",
+      "name": "Game Gear"
+    },
+    {
+      "id": "18",
+      "name": "Genesis"
+    },
+    {
+      "id": "35",
+      "name": "Master System"
+    },
+    {
+      "id": "36",
+      "name": "Mega Drive"
+    },
+    {
+      "id": "4958",
+      "name": "Pico"
+    },
+    {
+      "id": "4949",
+      "name": "SG-1000"
+    }
+  ]
+}
