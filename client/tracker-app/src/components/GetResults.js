@@ -293,7 +293,7 @@ class GetResults extends Component {
           return this.props.boxart.boxart.data[game.id] ? (
             //runs if there is an image
 
-            <Card className="my-1">
+            <Card className="card">
               <Media>
                 {//gets cover image
                 this.props.boxart.boxart.data[game.id].map((img, index) => {
@@ -306,7 +306,7 @@ class GetResults extends Component {
                         <img
                           key={index}
                           alt="cover"
-                          className="mx-2 my-2"
+                          className="mx-1 my-1"
                           src={coverUrl}
                         />
                       </Col>
