@@ -302,7 +302,7 @@ class GetResults extends Component {
                       'https://cdn.thegamesdb.net/images/thumb/' + img.filename;
 
                     return (
-                      <Col lg={3}>
+                      <Col lg={2}>
                         <img
                           key={index}
                           alt="cover"
@@ -317,11 +317,21 @@ class GetResults extends Component {
                 })}
 
                 <Media.Body className="my-2">
-                  <strong>{game.game_title}</strong>
-                  <br />
-                  {this.state.platformName}
-                  <br />
-                  {game.release_date}
+                  <Row>
+                    <Col xl={5}>
+                      <strong>{game.game_title}</strong>
+                    </Col>
+                    <Col>
+                      {PlatformList.platforms.map((plat, index) => {
+                        var platformNum = game.platform;
+                        var platformNumStr = platformNum.toString();
+                        if (platformNumStr === plat.id) {
+                          return <React.Fragment>{plat.name}</React.Fragment>;
+                        }
+                      })}
+                    </Col>
+                    <Col xl={2}>{game.release_date}</Col>
+                  </Row>
                 </Media.Body>
                 <Button
                   className="my-2 mx-2"
@@ -369,9 +379,7 @@ class GetResults extends Component {
           );
         })}
       </Container>
-    ) : (
-      <Container>Loading</Container>
-    );
+    ) : null;
   }
 }
 

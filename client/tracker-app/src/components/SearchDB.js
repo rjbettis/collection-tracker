@@ -62,7 +62,6 @@ class SearchDB extends Component {
    */
   handlePlatformSelect = (event) => {
     this.setState({ platform: event });
-    this.setState({ displayResults: false });
     this.setState({ searchValue: '' });
     let selectedPlatformId = event;
 
@@ -77,7 +76,7 @@ class SearchDB extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col>
+          <Col md={3} lg={2} xl={1}>
             <ButtonGroup vertical>
               {/*Nintendo Button*/}
               <DropdownButton
@@ -114,7 +113,7 @@ class SearchDB extends Component {
               </DropdownButton>
             </ButtonGroup>
           </Col>
-          <Col lg={11}>
+          <Col>
             <Form onSubmit={this.handleSearch}>
               <Form.Group controlId="formSearch">
                 <Form.Label>
@@ -144,6 +143,7 @@ class SearchDB extends Component {
               </Container>
             ) : null}
           </Col>
+          <Col lg={1}></Col>
         </Row>
       </Container>
     );
