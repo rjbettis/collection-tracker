@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import PlatformList from '../data/platforms.json';
 import DeveloperList from '../data/developers.json';
-
+import Table from 'react-bootstrap/Table';
 class GetResults extends Component {
   constructor(props) {
     super(props);
@@ -287,97 +287,79 @@ class GetResults extends Component {
           </Modal.Footer>
         </Modal>
 
-        {this.props.searchResults.games.map((game, index) => {
-          let coverUrl = '';
+        <Table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Game Title</th>
+              <th>Console Platform</th>
+              <th>Release Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.searchResults.games.map((game, index) => {
+              let coverUrl = '';
+              return (
+                <tr>
+                  <td>
+                    {//gets cover image
+                    this.props.boxart.boxart.data[game.id].map((img, index) => {
+                      if (img.side === 'front') {
+                        coverUrl =
+                          'https://cdn.thegamesdb.net/images/thumb/' +
+                          img.filename;
 
-          return this.props.boxart.boxart.data[game.id] ? (
-            //runs if there is an image
-
-            <Card className="card">
-              <Media>
-                {//gets cover image
-                this.props.boxart.boxart.data[game.id].map((img, index) => {
-                  if (img.side === 'front') {
-                    coverUrl =
-                      'https://cdn.thegamesdb.net/images/thumb/' + img.filename;
-
-                    return (
-                      <Col lg={2}>
-                        <img
-                          key={index}
-                          alt="cover"
-                          className="mx-1 my-1"
-                          src={coverUrl}
-                        />
-                      </Col>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
-
-                <Media.Body className="my-2">
-                  <Row>
-                    <Col xl={5}>
-                      <strong>{game.game_title}</strong>
-                    </Col>
-                    <Col>
-                      {PlatformList.platforms.map((plat, index) => {
-                        var platformNum = game.platform;
-                        var platformNumStr = platformNum.toString();
-                        if (platformNumStr === plat.id) {
-                          return <React.Fragment>{plat.name}</React.Fragment>;
-                        }
-                      })}
-                    </Col>
-                    <Col xl={2}>{game.release_date}</Col>
-                  </Row>
-                </Media.Body>
-                <Button
-                  className="my-2 mx-2"
-                  variant="secondary"
-                  type="submit"
-                  onClick={(event) =>
-                    this.handleShow(
-                      game.game_title,
-                      coverUrl,
-                      game.release_date,
-                      this.state.platformName
-                    )
-                  }
-                >
-                  {this.state.addedGameId === game.id ? 'Added' : 'Add Game'}
-                </Button>
-              </Media>
-            </Card>
-          ) : (
-            //runs if there is NOT an image
-            <Card className="my-1">
-              <Media>
-                <Col lg={3}>
-                  <img className="mx-2 my-2" src={coverNotFound} alt="cover" />
-                </Col>
-                <Media.Body className="my-2">
-                  <strong>{game.game_title}</strong>
-                  <br />
-                  {this.state.platformName}
-                  <br />
-                  {game.release_date}
-                </Media.Body>
-                <Button
-                  className="my-2 mx-2"
-                  variant="secondary"
-                  type="submit"
-                  onClick={(event) =>
-                    this.handleShow(game.game_title, coverUrl)
-                  }
-                >
-                  {this.state.addedGameId === game.id ? 'Added' : 'Add Game'}
-                </Button>
-              </Media>
-            </Card>
-          );
-        })}
+                        return (
+                          <img
+                            key={index}
+                            alt="cover"
+                            className="mx-1 my-1"
+                            src={coverUrl}
+                          />
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
+                  </td>
+                  <td>
+                    <strong>{game.game_title}</strong>
+                  </td>
+                  <td>
+                    {PlatformList.platforms.map((plat, index) => {
+                      var platformNum = game.platform;
+                      var platformNumStr = platformNum.toString();
+                      if (platformNumStr === plat.id) {
+                        return <React.Fragment>{plat.name}</React.Fragment>;
+                      }
+                    })}
+                  </td>
+                  <td>{game.release_date}</td>
+                  <td>
+                    <Button
+                      className="my-2 mx-2"
+                      variant="secondary"
+                      type="submit"
+                      onClick={(event) =>
+                        this.handleShow(
+                          game.game_title,
+                          coverUrl,
+                          game.release_date,
+                          this.state.platformName
+                        )
+                      }
+                    >
+                      {this.state.addedGameId === game.id
+                        ? 'Added'
+                        : 'Add Game'}
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
       </Container>
     ) : null;
   }
