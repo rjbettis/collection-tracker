@@ -27,12 +27,6 @@ class GetResults extends Component {
       boxCheckbox: false,
       completenessPrompt: 'Select the completeness that applies',
     });
-
-    PlatformList.platforms.forEach((plat, index) => {
-      if (this.props.platform === plat.id) {
-        this.setState({ platformName: plat.name });
-      }
-    });
   }
 
   async addGame(coverUrl, gameName, platform, completeness) {
@@ -71,8 +65,13 @@ class GetResults extends Component {
     });
   }
 
-  handleShow(title, cover) {
-    this.setState({ showModal: true, gameTitle: title, gameCover: cover });
+  handleShow(title, cover, platform) {
+    this.setState({
+      showModal: true,
+      gameTitle: title,
+      gameCover: cover,
+      gamePlatform: platform,
+    });
   }
 
   handleClose() {
@@ -114,7 +113,7 @@ class GetResults extends Component {
       this.addGame(
         this.state.gameCover,
         this.state.gameTitle,
-        this.state.platformName,
+        this.state.gamePlatform,
         completeness
       );
       this.handleClose();
@@ -127,7 +126,7 @@ class GetResults extends Component {
       this.addGame(
         this.state.gameCover,
         this.state.gameTitle,
-        this.state.platformName,
+        this.state.gamePlatform,
         completeness
       );
       this.handleClose();
@@ -140,7 +139,7 @@ class GetResults extends Component {
       this.addGame(
         this.state.gameCover,
         this.state.gameTitle,
-        this.state.platformName,
+        this.state.gamePlatform,
         completeness
       );
       this.handleClose();
@@ -153,7 +152,7 @@ class GetResults extends Component {
       this.addGame(
         this.state.gameCover,
         this.state.gameTitle,
-        this.state.platformName,
+        this.state.gamePlatform,
         completeness
       );
       this.handleClose();
@@ -166,7 +165,7 @@ class GetResults extends Component {
       this.addGame(
         this.state.gameCover,
         this.state.gameTitle,
-        this.state.platformName,
+        this.state.gamePlatform,
         completeness
       );
       this.handleClose();
@@ -179,7 +178,7 @@ class GetResults extends Component {
       this.addGame(
         this.state.gameCover,
         this.state.gameTitle,
-        this.state.platformName,
+        this.state.gamePlatform,
         completeness
       );
       this.handleClose();
@@ -192,7 +191,7 @@ class GetResults extends Component {
       this.addGame(
         this.state.gameCover,
         this.state.gameTitle,
-        this.state.platformName,
+        this.state.gamePlatform,
         completeness
       );
       this.handleClose();
@@ -205,7 +204,7 @@ class GetResults extends Component {
       this.addGame(
         this.state.gameCover,
         this.state.gameTitle,
-        this.state.platformName,
+        this.state.gamePlatform,
         completeness
       );
       this.handleClose();
@@ -225,6 +224,111 @@ class GetResults extends Component {
   render() {
     return this.props.searchResults ? (
       <Container fluid>
+        <Table size="sm">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Game Title</th>
+              <th>Console Platform</th>
+              <th>Release Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.searchResults.games.map((game, index) => {
+              let coverUrl = '';
+              let platformName = '';
+
+              //runs if there is front box art
+              return this.props.boxart.boxart.data[game.id] ? (
+                <tr>
+                  <td>
+                    {//gets cover image
+                    this.props.boxart.boxart.data[game.id].map((img, index) => {
+                      if (img.side === 'front') {
+                        coverUrl =
+                          'https://cdn.thegamesdb.net/images/thumb/' +
+                          img.filename;
+
+                        return (
+                          <img
+                            key={index}
+                            alt="cover"
+                            className="mx-1 my-1"
+                            src={coverUrl}
+                          />
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
+                  </td>
+                  <td>{game.game_title}</td>
+                  <td>
+                    {PlatformList.platforms.map((plat, index) => {
+                      var platformNum = game.platform;
+                      var platformNumStr = platformNum.toString();
+                      if (platformNumStr === plat.id) {
+                        platformName = plat.name;
+                        return <React.Fragment>{plat.name}</React.Fragment>;
+                      }
+                    })}
+                  </td>
+                  <td>{game.release_date}</td>
+                  <td>
+                    <Button
+                      className="my-2 mx-2"
+                      variant="secondary"
+                      type="submit"
+                      onClick={(event) =>
+                        this.handleShow(game.game_title, coverUrl, platformName)
+                      }
+                    >
+                      Add Game
+                    </Button>
+                  </td>
+                </tr>
+              ) : (
+                //runs if there is no front box art
+                <tr>
+                  <td>
+                    <img
+                      key={index}
+                      alt="cover"
+                      className="mx-1 my-1"
+                      src={coverNotFound}
+                    />
+                  </td>
+                  <td>{game.game_title}</td>
+                  <td>
+                    {PlatformList.platforms.map((plat, index) => {
+                      var platformNum = game.platform;
+                      var platformNumStr = platformNum.toString();
+                      if (platformNumStr === plat.id) {
+                        platformName = plat.name;
+                        return <React.Fragment>{plat.name}</React.Fragment>;
+                      }
+                    })}
+                  </td>
+                  <td>{game.release_date}</td>
+                  <td>
+                    <Button
+                      className="my-2 mx-2"
+                      variant="secondary"
+                      type="submit"
+                      onClick={(event) =>
+                        this.handleShow(game.game_title, coverUrl, platformName)
+                      }
+                    >
+                      Add Game
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+
         <Modal
           show={this.state.showModal}
           onHide={(event) => this.handleClose(event)}
@@ -242,7 +346,7 @@ class GetResults extends Component {
                   <img key="cover" alt="gameCover" src={this.state.gameCover} />
                 </Form.Label>
                 <Col sm="auto">
-                  {this.state.completenessPrompt}
+                  {this.state.completenessPrompt + this.state.gamePlatform}
                   <br />
                   <br />
                   {this.state.selectCompleteness}
@@ -286,78 +390,6 @@ class GetResults extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-
-        <Table size="sm">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Game Title</th>
-              <th>Console Platform</th>
-              <th>Release Date</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.searchResults.games.map((game, index) => {
-              let coverUrl = '';
-              return (
-                <tr>
-                  <td>
-                    {//gets cover image
-                    this.props.boxart.boxart.data[game.id].map((img, index) => {
-                      if (img.side === 'front') {
-                        coverUrl =
-                          'https://cdn.thegamesdb.net/images/thumb/' +
-                          img.filename;
-
-                        return (
-                          <img
-                            key={index}
-                            alt="cover"
-                            className="mx-1 my-1"
-                            src={coverUrl}
-                          />
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
-                  </td>
-                  <td>{game.game_title}</td>
-                  <td>
-                    {PlatformList.platforms.map((plat, index) => {
-                      var platformNum = game.platform;
-                      var platformNumStr = platformNum.toString();
-                      if (platformNumStr === plat.id) {
-                        return <React.Fragment>{plat.name}</React.Fragment>;
-                      }
-                    })}
-                  </td>
-                  <td>{game.release_date}</td>
-                  <td>
-                    <Button
-                      className="my-2 mx-2"
-                      variant="secondary"
-                      type="submit"
-                      onClick={(event) =>
-                        this.handleShow(
-                          game.game_title,
-                          coverUrl,
-                          game.release_date,
-                          this.state.platformName
-                        )
-                      }
-                    >
-                      {this.state.addedGameId === game.id
-                        ? 'Added'
-                        : 'Add Game'}
-                    </Button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
       </Container>
     ) : null;
   }
