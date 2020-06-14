@@ -1,0 +1,32 @@
+{
+  "platforms": [
+    {
+      "id": "10",
+      "name": "PlayStation"
+    },
+    {
+      "id": "11",
+      "name": "PlayStation 2"
+    },
+    {
+      "id": "12",
+      "name": "PlayStation 3"
+    },
+    {
+      "id": "4919",
+      "name": "PlayStation 4"
+    },
+    {
+      "id": "4980",
+      "name": "PlayStation 5"
+    },
+    {
+      "id": "13",
+      "name": "PSP"
+    },
+    {
+      "id": "39",
+      "name": "Vita"
+    }
+  ]
+}

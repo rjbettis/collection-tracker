@@ -287,7 +287,7 @@ class GetResults extends Component {
           </Modal.Footer>
         </Modal>
 
-        <Table>
+        <Table size="sm">
           <thead>
             <tr>
               <th></th>
@@ -323,9 +323,7 @@ class GetResults extends Component {
                       }
                     })}
                   </td>
-                  <td>
-                    <strong>{game.game_title}</strong>
-                  </td>
+                  <td>{game.game_title}</td>
                   <td>
                     {PlatformList.platforms.map((plat, index) => {
                       var platformNum = game.platform;

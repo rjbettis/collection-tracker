@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Container fluid={true}>
+        <Container fluid={true} className="zero-padding">
           <Navigation />
           <Route exact path="/Search" component={Search} />
           <Route exact path="/collection" component={Collection} />

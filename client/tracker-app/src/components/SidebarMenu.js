@@ -76,105 +76,83 @@ class SearchDB extends Component {
 
   render() {
     return (
-      <Container fluid={true}>
+      <Container fluid>
+        <Row>Consoles</Row>
         <Row>
-          <Col md={3} lg={2} xl={1} className="zero-padding">
-            <Row>
-              <Container className="sidebar-margin">
-                <ButtonGroup vertical className="btn btn-block zero-padding">
-                  <Button size="md" variant="secondary" title="test">
-                    All
-                  </Button>
+          <Col md={3} lg={2} xl={1}>
+            <ButtonGroup vertical className="d-flex">
+              <DropdownButton
+                id="bg-vertical-dropdown-1"
+                title="Consoles"
+                variant="secondary"
+                as={ButtonGroup}
+              >
+                <ButtonGroup vertical className="d-flex">
                   <DropdownButton
                     id="bg-vertical-dropdown-1"
-                    title="Consoles"
+                    title="Nintendo"
                     variant="secondary"
-                    drop="right"
-                    as={ButtonGroup}
-                  >
-                    <ButtonGroup vertical className="d-flex">
-                      {/*Nintendo Button*/}
-                      <DropdownButton
-                        id="bg-vertical-dropdown-1"
-                        title="Nintendo"
-                        variant="secondary"
-                        drop="right"
-                        as={ButtonGroup}
-                        onSelect={(event) => this.handlePlatformSelect(event)}
-                      >
-                        {this.state.nintendoList.platforms.map(
-                          (plat, index) => {
-                            return (
-                              <Dropdown.Item eventKey={plat.id}>
-                                {plat.name}
-                              </Dropdown.Item>
-                            );
-                          }
-                        )}
-                      </DropdownButton>
-
-                      {/*Sega Button*/}
-                      <DropdownButton
-                        id="bg-vertical-dropdown-1"
-                        title="Sega"
-                        variant="secondary"
-                        drop="right"
-                        as={ButtonGroup}
-                        onSelect={(event) => this.handlePlatformSelect(event)}
-                      >
-                        {this.state.segaList.platforms.map((plat, index) => {
-                          return (
-                            <Dropdown.Item eventKey={plat.id}>
-                              {plat.name}
-                            </Dropdown.Item>
-                          );
-                        })}
-                      </DropdownButton>
-
-                      {/*Sony Button*/}
-                      <DropdownButton
-                        id="bg-vertical-dropdown-1"
-                        title="Sony"
-                        variant="secondary"
-                        drop="right"
-                        as={ButtonGroup}
-                        onSelect={(event) => this.handlePlatformSelect(event)}
-                      >
-                        {this.state.sonyList.platforms.map((plat, index) => {
-                          return (
-                            <Dropdown.Item eventKey={plat.id}>
-                              {plat.name}
-                            </Dropdown.Item>
-                          );
-                        })}
-                      </DropdownButton>
-                    </ButtonGroup>
-                  </DropdownButton>
-                  <DropdownButton
-                    id="bg-vertical-dropdown-1"
-                    title="Handhelds"
-                    variant="secondary"
-                    drop="right"
                     as={ButtonGroup}
                   ></DropdownButton>
                   <DropdownButton
                     id="bg-vertical-dropdown-1"
-                    title="Computers"
+                    title="Sega"
                     variant="secondary"
-                    drop="right"
                     as={ButtonGroup}
                   ></DropdownButton>
-                  <Button
-                    className="btn-no-dropdown"
-                    size="md"
-                    variant="secondary"
-                    title="test"
-                  >
-                    Arcade
-                  </Button>
                 </ButtonGroup>
-              </Container>
-            </Row>
+              </DropdownButton>
+              {/*Nintendo Button*/}
+              <DropdownButton
+                id="bg-vertical-dropdown-1"
+                title="Nintendo"
+                variant="secondary"
+                as={ButtonGroup}
+                onSelect={(event) => this.handlePlatformSelect(event)}
+              >
+                {this.state.nintendoList.platforms.map((plat, index) => {
+                  return (
+                    <Dropdown.Item eventKey={plat.id}>
+                      {plat.name}
+                    </Dropdown.Item>
+                  );
+                })}
+              </DropdownButton>
+
+              {/*Sega Button*/}
+              <DropdownButton
+                id="bg-vertical-dropdown-1"
+                title="Sega"
+                variant="secondary"
+                as={ButtonGroup}
+                onSelect={(event) => this.handlePlatformSelect(event)}
+              >
+                {this.state.segaList.platforms.map((plat, index) => {
+                  return (
+                    <Dropdown.Item eventKey={plat.id}>
+                      {plat.name}
+                    </Dropdown.Item>
+                  );
+                })}
+              </DropdownButton>
+
+              {/*Sony Button*/}
+              <DropdownButton
+                id="bg-vertical-dropdown-1"
+                title="Sony"
+                variant="secondary"
+                as={ButtonGroup}
+                onSelect={(event) => this.handlePlatformSelect(event)}
+              >
+                {this.state.sonyList.platforms.map((plat, index) => {
+                  return (
+                    <Dropdown.Item eventKey={plat.id}>
+                      {plat.name}
+                    </Dropdown.Item>
+                  );
+                })}
+              </DropdownButton>
+            </ButtonGroup>
           </Col>
           <Col>
             <Form onSubmit={this.handleSearch}>

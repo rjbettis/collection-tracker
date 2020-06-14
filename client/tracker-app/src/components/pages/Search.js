@@ -10,7 +10,6 @@ export class Search extends Component {
       <Container fluid={true}>
         <Row>
           <Col className={'lightgrey'}>
-            <h1>Search</h1>
             <SearchDB />
           </Col>
         </Row>
