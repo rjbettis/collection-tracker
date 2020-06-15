@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import Media from 'react-bootstrap/Media';
 import coverNotFound from './images/No_image_available.png';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -11,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import PlatformList from '../data/platforms.json';
 import DeveloperList from '../data/developers.json';
 import Table from 'react-bootstrap/Table';
+
 class GetResults extends Component {
   constructor(props) {
     super(props);
@@ -271,6 +270,8 @@ class GetResults extends Component {
                       if (platformNumStr === plat.id) {
                         platformName = plat.name;
                         return <React.Fragment>{plat.name}</React.Fragment>;
+                      } else {
+                        return null;
                       }
                     })}
                   </td>
@@ -307,6 +308,8 @@ class GetResults extends Component {
                       if (platformNumStr === plat.id) {
                         platformName = plat.name;
                         return <React.Fragment>{plat.name}</React.Fragment>;
+                      } else {
+                        return null;
                       }
                     })}
                   </td>

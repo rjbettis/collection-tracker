@@ -180,7 +180,10 @@ class SearchDB extends Component {
             <Form onSubmit={this.handleSearch}>
               <Form.Group controlId="formSearch">
                 <Form.Label>
-                  Search for: <strong>{this.state.platformName}</strong>
+                  <h2>
+                    Search for games to add to your collection:{' '}
+                    <strong>{this.state.platformName}</strong>
+                  </h2>
                 </Form.Label>
 
                 <Form.Control
@@ -206,7 +209,6 @@ class SearchDB extends Component {
               </Container>
             ) : null}
           </Col>
-          <Col lg={1}></Col>
         </Row>
       </Container>
     );

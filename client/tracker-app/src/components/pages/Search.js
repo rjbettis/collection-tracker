@@ -9,7 +9,7 @@ export class Search extends Component {
     return (
       <Container fluid={true}>
         <Row>
-          <Col className={'lightgrey'}>
+          <Col>
             <SearchDB />
           </Col>
         </Row>
