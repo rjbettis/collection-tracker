@@ -1,25 +1,25 @@
 //Deletes games to the server-games table
 
-"use strict";
+'use strict';
 
-const AWS = require("aws-sdk"); // eslint-disable-line import/no-extraneous-dependencies
+const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
   var params = {
-    TableName: process.env.GAME_TABLE,
+    TableName: process.env.GAME_TEST_TABLE_THREE,
     Key: {
-      id: event.id,
-      platform: event.platform
-    }
+      sortName: event.sortName,
+      platform: event.platform,
+    },
   };
 
   // Call DynamoDB to add the item to the table
-  dynamoDb.delete(params, function(err, data) {
+  dynamoDb.delete(params, function (err, data) {
     if (err) {
-      console.log("Error", err);
+      console.log('Error', err);
     } else {
-      console.log("Success", data);
+      console.log('Success', data);
     }
   });
 };

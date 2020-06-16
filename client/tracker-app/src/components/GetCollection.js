@@ -40,9 +40,9 @@ export class GetCollection extends Component {
     this.setState({ games: res });
   }
 
-  async removeGame(id, platform) {
+  async removeGame(sortName, platform) {
     await fetch(
-      `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/delete-game?id=${id}&platform=${platform}`
+      `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/delete-game?sortName=${sortName}&platform=${platform}`
     );
     this.handleClick(platform);
   }
@@ -86,7 +86,7 @@ export class GetCollection extends Component {
                   </thead>
                   <tbody>
                     {this.state.games.map((game, index) => {
-                      let gameId = game['id'];
+                      let sortName = game['sortName'];
                       let gamePlatform = game['platform'];
 
                       let cover = '';
@@ -114,7 +114,7 @@ export class GetCollection extends Component {
                               variant="secondary"
                               type="submit"
                               onClick={(e) =>
-                                this.removeGame(gameId, gamePlatform)
+                                this.removeGame(sortName, gamePlatform)
                               }
                             >
                               Remove Game

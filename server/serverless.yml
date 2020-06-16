@@ -9,6 +9,8 @@ provider:
   environment:
     GAME_TEST_TABLE: ${self:service}-games-test
     PLATFORM_TEST_TABLE: ${self:service}-platforms-test
+    GAME_TEST_TABLE_TWO: ${self:service}-games-test-two
+    GAME_TEST_TABLE_THREE: ${self:service}-games-test-three
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -21,6 +23,8 @@ provider:
       Resource:
         - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TEST_TABLE}'
         - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.PLATFORM_TEST_TABLE}'
+        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TEST_TABLE_TWO}'
+        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TEST_TABLE_THREE}'
 
 functions:
   search-tgdb:
@@ -85,7 +89,7 @@ functions:
           integration: LAMBDA
           request:
             template:
-              application/json: '{ "id" : "$input.params(''id'')", "platform" : "$input.params(''platform'')" }'
+              application/json: '{ "sortName" : "$input.params(''sortName'')", "platform" : "$input.params(''platform'')" }'
   get-timeline:
     handler: getTimeline.endpoint
     events:
@@ -135,3 +139,43 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
+
+    GameTestTableTwo:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
+
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: ${self:provider.environment.GAME_TEST_TABLE_TWO}
+
+    GameTestTableThree:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: platform
+            AttributeType: S
+          - AttributeName: sortName
+            AttributeType: S
+        KeySchema:
+          - AttributeName: platform
+            KeyType: HASH
+          - AttributeName: sortName
+            KeyType: RANGE
+
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: ${self:provider.environment.GAME_TEST_TABLE_THREE}

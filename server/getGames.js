@@ -7,7 +7,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
   var params = {
-    TableName: process.env.GAME_TEST_TABLE,
+    TableName: process.env.GAME_TEST_TABLE_THREE,
     FilterExpression: 'platform = :platform',
     ExpressionAttributeValues: {
       ':platform': event.platform,

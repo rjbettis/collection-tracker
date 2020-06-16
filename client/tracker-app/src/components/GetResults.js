@@ -74,7 +74,12 @@ class GetResults extends Component {
   }
 
   handleClose() {
-    this.setState({ showModal: false });
+    this.setState({
+      showModal: false,
+      boxCheckbox: false,
+      cartCheckbox: false,
+      manualCheckbox: false,
+    });
   }
 
   handleCartToggle(event) {
