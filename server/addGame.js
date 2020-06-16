@@ -11,11 +11,10 @@ module.exports.endpoint = (event, context, callback) => {
     TableName: process.env.GAME_TEST_TABLE_THREE,
     Item: {
       platform: event.platform,
-      sortName: event.name + ' ' + uuid.v1(),
+      sortName: event.name + ' + ' + uuid.v1(),
       name: event.name,
       cover: event.cover,
       completeness: event.completeness,
-      developer: event.developer,
     },
   };
 
