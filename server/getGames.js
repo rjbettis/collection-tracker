@@ -1,21 +1,21 @@
 //Gets list of games from specific platform
 
-"use strict";
+'use strict';
 
-const AWS = require("aws-sdk"); // eslint-disable-line import/no-extraneous-dependencies
+const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
   var params = {
-    TableName: process.env.GAME_TABLE,
-    FilterExpression: "platform = :platform",
+    TableName: process.env.GAME_TEST_TABLE,
+    FilterExpression: 'platform = :platform',
     ExpressionAttributeValues: {
-      ":platform": event.platform
-    }
+      ':platform': event.platform,
+    },
   };
 
-  // Call DynamoDB to add the item to the table
-  dynamoDb.scan(params, function(err, data) {
+  // Call DynamoDB to get item from the table
+  dynamoDb.scan(params, function (err, data) {
     if (err) {
       callback(err, null);
     } else {

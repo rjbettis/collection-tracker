@@ -7,8 +7,8 @@ provider:
   name: aws
   runtime: nodejs10.x
   environment:
-    GAME_TABLE: ${self:service}-games
-    PLATFORM_TABLE: ${self:service}-platforms
+    GAME_TEST_TABLE: ${self:service}-games-test
+    PLATFORM_TEST_TABLE: ${self:service}-platforms-test
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -19,8 +19,8 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TABLE}'
-        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.PLATFORM_TABLE}'
+        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAME_TEST_TABLE}'
+        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.PLATFORM_TEST_TABLE}'
 
 functions:
   search-tgdb:
@@ -97,10 +97,30 @@ functions:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    GameTestTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
+        AttributeDefinitions:
+          - AttributeName: platform
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: platform
+            KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
+
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: ${self:provider.environment.GAME_TEST_TABLE}
+
+    PlatformTestTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.PLATFORM_TEST_TABLE}
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
@@ -111,22 +131,6 @@ resources:
             KeyType: HASH
           - AttributeName: platform
             KeyType: RANGE
-
-        ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
-        TableName: ${self:provider.environment.GAME_TABLE}
-
-    PlatformTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:provider.environment.PLATFORM_TABLE}
-        AttributeDefinitions:
-          - AttributeName: platform
-            AttributeType: S
-        KeySchema:
-          - AttributeName: platform
-            KeyType: HASH
 
         ProvisionedThroughput:
           ReadCapacityUnits: 5

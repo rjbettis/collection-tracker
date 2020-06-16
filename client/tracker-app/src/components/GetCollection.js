@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Button from "react-bootstrap/Button";
-import coverNotFound from "./images/No_image_available.png";
-import Table from "react-bootstrap/Table";
+import React, { Component } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
+import coverNotFound from './images/No_image_available.png';
+import Table from 'react-bootstrap/Table';
 
 export class GetCollection extends Component {
   constructor(props) {
@@ -13,13 +13,13 @@ export class GetCollection extends Component {
 
     this.state = {
       platform: [],
-      displayPlatform: "",
+      displayPlatform: '',
     };
   }
 
   async componentDidMount() {
     const response = await fetch(
-      "https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform-tabs"
+      'https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/get-platform-tabs'
     );
     const res = await response.json();
     this.setState({ platform: res });
@@ -86,11 +86,11 @@ export class GetCollection extends Component {
                   </thead>
                   <tbody>
                     {this.state.games.map((game, index) => {
-                      let gameId = game["id"];
-                      let gamePlatform = game["platform"];
+                      let gameId = game['id'];
+                      let gamePlatform = game['platform'];
 
-                      let cover = "";
-                      if (game.cover === "data:image/png") {
+                      let cover = '';
+                      if (game.cover === 'data:image/png') {
                         cover = coverNotFound;
                       } else {
                         cover = game.cover;
@@ -107,7 +107,7 @@ export class GetCollection extends Component {
                           </td>
                           <td>{game.name}</td>
                           <td>{gamePlatform}</td>
-                          <td>Release Date</td>
+                          <td>{game.completeness}</td>
                           <td>
                             <Button
                               className="my-2 mx-2"

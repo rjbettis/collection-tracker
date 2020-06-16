@@ -8,7 +8,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
   var params = {
-    TableName: process.env.GAME_TABLE,
+    TableName: process.env.GAME_TEST_TABLE,
     Item: {
       id: uuid.v1(),
       platform: event.platform,
