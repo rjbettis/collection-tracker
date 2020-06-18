@@ -22,11 +22,11 @@
     },
     {
       "id": "6",
-      "name": "Super Nintendo (SNES)"
+      "name": "SNES"
     },
     {
       "id": "7",
-      "name": "Nintendo Entertainment System (NES)"
+      "name": "NES"
     },
     {
       "id": "8",
@@ -224,7 +224,10 @@
       "id": "4927",
       "name": "Magnavox Odyssey 2"
     },
-    { "id": "4928", "name": "Fairchild Channel F" },
+    {
+      "id": "4928",
+      "name": "Fairchild Channel F"
+    },
     {
       "id": "4929",
       "name": "MSX"
