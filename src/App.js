@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Search from './components/pages/Search';
 import Collection from './components/pages/Collection';
 import './App.css';
+import Home from './components/pages/Home';
 
 class App extends Component {
   state = {
@@ -17,6 +18,7 @@ class App extends Component {
       <Router>
         <Container fluid={true} className="zero-padding">
           <Navigation />
+          <Route exact path="/" component={Home} />
           <Route exact path="/Search" component={Search} />
           <Route exact path="/collection" component={Collection} />
         </Container>

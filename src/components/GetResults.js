@@ -245,7 +245,7 @@ class GetResults extends Component {
 
               //runs if there is front box art
               return this.props.boxart.boxart.data[game.id] ? (
-                <tr>
+                <tr key={index}>
                   <td>
                     {//gets cover image
                     this.props.boxart.boxart.data[game.id].map((img, index) => {
@@ -274,7 +274,11 @@ class GetResults extends Component {
                       var platformNumStr = platformNum.toString();
                       if (platformNumStr === plat.id) {
                         platformName = plat.name;
-                        return <React.Fragment>{plat.name}</React.Fragment>;
+                        return (
+                          <React.Fragment key={index}>
+                            {plat.name}
+                          </React.Fragment>
+                        );
                       } else {
                         return null;
                       }
@@ -312,7 +316,11 @@ class GetResults extends Component {
                       var platformNumStr = platformNum.toString();
                       if (platformNumStr === plat.id) {
                         platformName = plat.name;
-                        return <React.Fragment>{plat.name}</React.Fragment>;
+                        return (
+                          <React.Fragment key={index}>
+                            {plat.name}
+                          </React.Fragment>
+                        );
                       } else {
                         return null;
                       }

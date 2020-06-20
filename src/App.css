@@ -36,3 +36,8 @@ body {
 .sidebar-cont {
   width: 100% !important;
 }
+
+.homepage-text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+}

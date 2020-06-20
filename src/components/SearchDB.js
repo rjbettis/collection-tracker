@@ -105,7 +105,7 @@ class SearchDB extends Component {
                         {this.state.nintendoList.platforms.map(
                           (plat, index) => {
                             return (
-                              <Dropdown.Item eventKey={plat.id}>
+                              <Dropdown.Item eventKey={plat.id} key={index}>
                                 {plat.name}
                               </Dropdown.Item>
                             );
@@ -124,7 +124,7 @@ class SearchDB extends Component {
                       >
                         {this.state.segaList.platforms.map((plat, index) => {
                           return (
-                            <Dropdown.Item eventKey={plat.id}>
+                            <Dropdown.Item eventKey={plat.id} key={index}>
                               {plat.name}
                             </Dropdown.Item>
                           );
@@ -142,7 +142,7 @@ class SearchDB extends Component {
                       >
                         {this.state.sonyList.platforms.map((plat, index) => {
                           return (
-                            <Dropdown.Item eventKey={plat.id}>
+                            <Dropdown.Item eventKey={plat.id} key={index}>
                               {plat.name}
                             </Dropdown.Item>
                           );

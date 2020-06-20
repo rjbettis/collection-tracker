@@ -28,8 +28,6 @@ export class GetCollection extends Component {
   async handleClick(platform) {
     this.setState({ platformSelected: platform });
     this.loadGames(platform);
-
-    console.log(platform);
   }
 
   async loadGames(platform) {
@@ -41,6 +39,8 @@ export class GetCollection extends Component {
   }
 
   async removeGame(sortName, platform) {
+    console.log(sortName);
+    console.log(platform);
     await fetch(
       `https://dh470k8a55.execute-api.us-east-1.amazonaws.com/dev/delete-game?sortName=${sortName}&platform=${platform}`
     );
@@ -96,7 +96,7 @@ export class GetCollection extends Component {
                         cover = game.cover;
                       }
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>
                             <img
                               key={index}
